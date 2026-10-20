@@ -1,0 +1,27 @@
+---
+import { Image } from 'astro:assets';
+import { categories, photos, url } from '../data/photos';
+
+const { category } = Astro.props;
+const list = photos.filter((p) => p.category === category);
+---
+<nav class="cats" aria-label="Categories">
+  {categories.map((c, i) => (
+    <>
+      {i > 0 && <span aria-hidden="true">•</span>}
+      <a href={url(c.href)} aria-current={c.key === category ? 'page' : undefined}>{c.label}</a>
+    </>
+  ))}
+</nav>
+
+{list.length === 0 ? (
+  <p class="empty">No photos in this category yet.</p>
+) : (
+  <div class="grid">
+    {list.map((p) => (
+      <a class="tile" href={url(`/photo/${p.slug}/`)} aria-label={`View ${p.title}`}>
+        <Image src={p.img} alt={p.title} width={Math.min(800, p.img.width)} />
+      </a>
+    ))}
+  </div>
+)}

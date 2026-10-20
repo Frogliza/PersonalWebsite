@@ -1,0 +1,52 @@
+---
+import '../styles/site.css';
+import { url } from '../data/photos';
+
+interface Props { title?: string; section?: 'gallery' | 'blog' | 'about' }
+const { title = 'Marcus Rust – Photography', section } = Astro.props;
+const nav = [['gallery', 'Gallery', '/'], ['blog', 'Blog', '/blog/'], ['about', 'About', '/about/']];
+---
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{title}</title>
+  <script is:inline>try{document.documentElement.dataset.theme=localStorage.getItem('theme')||'dark'}catch(e){}</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header class="top">
+    <a class="brand" href={url('/')}>Marcus Rust</a>
+    <nav aria-label="Main">
+      {nav.map(([key, label, href]) => (
+        <a href={url(href)} aria-current={section === key ? 'page' : undefined}>{label}</a>
+      ))}
+    </nav>
+    <button class="sw" role="switch" aria-checked="true" aria-label="Dark mode">
+      <span class="lbl">Dark</span><span class="track"></span>
+    </button>
+  </header>
+  <main class="page"><slot /></main>
+  <footer class="foot">© {new Date().getFullYear()} Marcus Rust</footer>
+
+  <script>
+    const root = document.documentElement;
+    const sw = document.querySelector('.sw');
+    function paint() {
+      const dark = root.dataset.theme !== 'light';
+      sw.setAttribute('aria-checked', String(dark));
+      sw.querySelector('.lbl').textContent = dark ? 'Dark' : 'Light';
+    }
+    sw.addEventListener('click', () => {
+      const t = root.dataset.theme === 'light' ? 'dark' : 'light';
+      root.dataset.theme = t;
+      try { localStorage.setItem('theme', t); } catch (e) {}
+      paint();
+    });
+    paint();
+  </script>
+</body>
+</html>

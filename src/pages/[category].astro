@@ -1,0 +1,14 @@
+---
+import Base from '../layouts/Base.astro';
+import Gallery from '../components/Gallery.astro';
+import { categories } from '../data/photos';
+
+export function getStaticPaths() {
+  return categories.filter((c) => c.key !== 'astro').map((c) => ({ params: { category: c.key } }));
+}
+const { category } = Astro.params;
+const label = categories.find((c) => c.key === category)?.label;
+---
+<Base section="gallery" title={`${label} – Marcus Rust`}>
+  <Gallery category={category} />
+</Base>
