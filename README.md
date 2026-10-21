@@ -32,3 +32,6 @@ These three values are visible in the page's code by design. Check EmailJS's cur
 ## Publishing
 `site` in `astro.config.mjs` is set to https://marcusrust.com and `public/CNAME` holds the domain.
 Push to `main`; in repo Settings → Pages set Source to **GitHub Actions**.
+
+## Colors
+All colors are variables at the top of `src/styles/site.css` (dark mode first, then light mode).
