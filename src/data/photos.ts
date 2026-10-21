@@ -25,6 +25,13 @@ const details: Record<string, Details> = {
   //   notes: 'Optional short note.',
   //   full: 'https://drive.google.com/file/d/FILE_ID/view?usp=sharing',
   // },
+  'astro/Orion Nebula (M42).jpg': {
+    subject: 'M42 - The Orion Nebula',
+    date: 'November 2024',
+    notes:'',
+    full: 'https://drive.google.com/file/d/1HXRJZqom2ueJr-fdzx898qJWd0JgYULw/view?usp=sharing',
+  },
+  
 };
 
 /* Every image in src/assets/photos/<category>/ becomes a photo automatically. */
