@@ -26,7 +26,7 @@ const details: Record<string, Details> = {
   //   full: 'https://drive.google.com/file/d/FILE_ID/view?usp=sharing',
   // },
   'astro/Orion Nebula (M42).jpg': {
-    subject: 'M42 - The Orion Nebula',
+    subject: '',
     date: 'November 2024',
     notes:'',
     full: 'https://drive.google.com/file/d/1HXRJZqom2ueJr-fdzx898qJWd0JgYULw/view?usp=sharing',
