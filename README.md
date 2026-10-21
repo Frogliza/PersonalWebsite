@@ -13,6 +13,9 @@
 
 ## Journal
 Entries live in `src/data/journal.ts` (title + paragraphs). Each one gets its own page.
+The Journal page shows each entry as a clickable thumbnail. To add one, save an image named after
+the entry's slug in `src/assets/journal/` (e.g. `the-equipment.jpg`, `the-process.jpg`). Entries
+without an image show a gray placeholder. Any shape works; thumbnails are cropped to 3:2.
 
 ## Contact form (EmailJS: sends to your email without showing it)
 1. Create a free account at emailjs.com.
