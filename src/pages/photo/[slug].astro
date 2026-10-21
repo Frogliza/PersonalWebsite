@@ -23,14 +23,13 @@ const cat = categories.find((c) => c.key === p.category);
   </a>
 
   <div class="view" style={`--ratio:${p.img.width / p.img.height}`}>
-    <div class="big">
-      <Image src={p.img} alt={p.subject} width={Math.min(2400, p.img.width)} loading="eager" />
-    </div>
-    <!-- Description fields: subject, date, notes. Shown without labels. -->
+    <!-- Description fields: subject and date. Shown without labels. -->
     <div class="desc">
       <h1>{p.subject}</h1>
       {p.date && <p class="date">{p.date}</p>}
-      {p.notes && <p class="notes">{p.notes}</p>}
+    </div>
+    <div class="big">
+      <Image src={p.img} alt={p.subject} width={Math.min(2400, p.img.width)} loading="eager" />
     </div>
   </div>
 

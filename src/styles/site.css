@@ -23,10 +23,11 @@ a{color:inherit;text-underline-offset:5px;text-decoration-thickness:1px}
 .cats a:hover{color:var(--fg)}
 .cats a[aria-current]{color:var(--accent-text)}
 
-/* Gallery */
-.grid{column-count:4;column-gap:16px}
-.tile{display:block;width:100%;margin:0 0 16px;padding:0;border:0;background:none;cursor:pointer;break-inside:avoid}
-.tile img{display:block;width:100%;height:auto;background:var(--hold)}
+/* Gallery: rows of equal height that fill the full width, so edges line up */
+.grid{--row:260px;display:flex;flex-wrap:wrap;align-items:flex-start;gap:12px}
+.grid::after{content:"";flex-grow:1000000}
+.tile{position:relative;display:block;min-width:0;flex-grow:calc(var(--r) * 100);flex-basis:calc(var(--r) * var(--row));aspect-ratio:var(--r);padding:0;border:0;background:var(--hold);cursor:pointer}
+.tile img{position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:cover}
 .tile:hover img{opacity:.85}
 
 /* Journal + page text */
@@ -38,17 +39,15 @@ a{color:inherit;text-underline-offset:5px;text-decoration-thickness:1px}
 .post p{margin:0;color:var(--mute)}
 .foot{padding:24px 48px;color:var(--mute);font-size:14px;border-top:1px solid var(--line)}
 
-/* Photo page: photo centered, short description to its right */
+/* Photo page: subject and date above the photo */
 .back{display:inline-flex;margin:0 0 16px;padding:6px;color:var(--mute)}
 .back:hover{color:var(--fg)}
 .back svg{display:block}
-.view{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);gap:32px;align-items:start}
-.big{grid-column:2}
-.big img{display:block;width:min(calc(78vh * var(--ratio)),56vw);height:auto;background:var(--hold)}
-.desc{grid-column:3;align-self:start}
-.desc h1{margin:0 0 6px;font-size:20px;line-height:1.25;font-weight:600;letter-spacing:-.01em}
+.view{display:block}
+.desc{margin:0 0 20px;text-align:center}
+.desc h1{margin:0 0 4px;font-size:22px;line-height:1.25;font-weight:600;letter-spacing:-.01em}
 .desc .date{margin:0;color:var(--mute);font-size:15px}
-.desc .notes{margin:14px 0 0;max-width:34ch;color:var(--mute);font-size:15px}
+.big img{display:block;width:min(calc(74vh * var(--ratio)),100%);height:auto;margin:0 auto;background:var(--hold)}
 .actions{margin:24px 0 0;text-align:center}
 .fullbtn,.send{display:inline-block;padding:10px 20px;border:1px solid var(--btn-bd);border-radius:6px;background:var(--btn-bg);color:var(--btn-fg);font:inherit;text-decoration:none;cursor:pointer}
 .fullbtn:hover,.send:hover{background:var(--btn-hbg);border-color:var(--btn-hbd)}
@@ -64,6 +63,7 @@ a{color:inherit;text-underline-offset:5px;text-decoration-thickness:1px}
 .card img,.card .ph{display:block;width:100%;height:auto;aspect-ratio:3/2;object-fit:cover;background:var(--hold)}
 .card:hover img,.card:hover .ph{opacity:.85}
 .cap{display:block;margin-top:10px;font-weight:600}
+.blurb{display:block;margin-top:2px;color:var(--mute);font-size:15px}
 
 /* Contact form */
 .form{max-width:520px;margin:0 auto;text-align:left}
@@ -78,7 +78,7 @@ a{color:inherit;text-underline-offset:5px;text-decoration-thickness:1px}
 /* About footer (photo pages and journal entries only) */
 .about-foot{padding:32px 48px;border-top:1px solid var(--line);text-align:center;color:var(--mute)}
 .about-foot h2{margin:0 0 10px;color:var(--fg);font-size:18px;font-weight:600;letter-spacing:-.01em}
-.about-foot p{max-width:60ch;margin:0 auto 8px;font-size:15px}
+.about-foot p{margin:0 0 4px;font-size:15px}
 .about-foot a{color:var(--fg)}
 .about-foot + .foot{border-top:0}
 
@@ -86,22 +86,18 @@ a{color:inherit;text-underline-offset:5px;text-decoration-thickness:1px}
 @media (prefers-reduced-motion:reduce){.track::after{transition:none}}
 
 /* Smaller screens */
-@media (max-width:1100px){.grid{column-count:3}}
-@media (max-width:999px){
-  .view{display:block}
-  .big img{width:min(100%,calc(78vh * var(--ratio)));margin:0 auto}
-  .desc{margin-top:20px;text-align:center}
-  .desc .notes{margin-left:auto;margin-right:auto}
-}
-@media (max-width:900px){.grid{column-count:2}}
 @media (max-width:700px){
-  .top{flex-wrap:wrap;gap:10px 20px;padding:18px 20px}
+  .top{position:relative;flex-direction:column;align-items:center;gap:8px;padding:18px 20px}
   .brand{font-size:20px}
-  .top nav{order:3;width:100%;gap:22px}
+  .top nav{justify-content:center;gap:22px}
+  .sw{position:absolute;top:14px;right:12px;margin-left:0}
   .page{padding:0 20px 48px}
   .cats{padding-bottom:20px}
-  .grid{column-count:1}
+  .grid{display:block}
   .tile{margin-bottom:12px}
+  .view{display:flex;flex-direction:column}
+  .big{order:1}
+  .desc{order:2;margin:20px 0 0}
   .about-foot{padding:24px 20px}
   .about-foot h2{font-size:15px;margin-bottom:8px}
   .about-foot p{font-size:13px}

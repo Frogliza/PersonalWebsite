@@ -2,8 +2,8 @@ import type { ImageMetadata } from 'astro';
 
 /* Journal entries. Each body item is one paragraph. */
 const list = [
-  { slug: 'the-equipment', title: 'The Equipment', body: ['Coming soon...'] },
-  { slug: 'the-process', title: 'The Process', body: ['Coming soon...'] },
+  { slug: 'the-equipment', title: 'The Equipment', summary: 'Coming soon...', body: ['Coming soon...'] },
+  { slug: 'the-process', title: 'The Process', summary: 'Coming soon...', body: ['Coming soon...'] },
 ];
 
 /* Thumbnails: put an image named after the entry's slug in src/assets/journal/

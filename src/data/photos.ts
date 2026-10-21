@@ -14,23 +14,19 @@ export const url = (path: string) => import.meta.env.BASE_URL.replace(/\/$/, '')
 /* OPTIONAL details for a photo, keyed by 'category/filename'. Every field is optional.
      subject: name of the subject (defaults to the filename)
      date:    when it was taken, worded how you want it shown (e.g. 'March 2026')
-     notes:   a short optional note
      full:    public Google Drive link for the "Full resolution" button
-   The photo page shows the values only, without labels. */
-type Details = { subject?: string; date?: string; notes?: string; full?: string };
+   The photo page shows the subject and date only, without labels. */
+type Details = { subject?: string; date?: string; full?: string };
 const details: Record<string, Details> = {
   // 'astro/orion-nebula.jpg': {
   //   subject: 'Orion Nebula',
   //   date: 'March 2026',
-  //   notes: 'Optional short note.',
   //   full: 'https://drive.google.com/file/d/FILE_ID/view?usp=sharing',
   // },
   'astro/Orion Nebula (M42).jpg': {
     date: 'November 2024',
-    notes:'',
     full: 'https://drive.google.com/file/d/1HXRJZqom2ueJr-fdzx898qJWd0JgYULw/view?usp=sharing',
   },
-  
 };
 
 /* Every image in src/assets/photos/<category>/ becomes a photo automatically. */

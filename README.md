@@ -8,11 +8,11 @@
 - Put one web-sized JPEG per photo (about 2400px on the long edge) in
   `src/assets/photos/astro/`, `nature/` or `misc/`. Use lowercase names like `orion-nebula.jpg`.
 - Astro makes the thumbnails and page-sized images itself.
-- Optional details go in `src/data/photos.ts`: `subject`, `date`, `notes`, and the Google Drive
-  `full` link. They show on the photo page without labels.
+- Optional details go in `src/data/photos.ts`: `subject`, `date`, and the Google Drive
+  `full` link. The subject and date show above the photo without labels.
 
 ## Journal
-Entries live in `src/data/journal.ts` (title + paragraphs). Each one gets its own page.
+Entries live in `src/data/journal.ts` (title, short description + paragraphs). Each one gets its own page.
 The Journal page shows each entry as a clickable thumbnail. To add one, save an image named after
 the entry's slug in `src/assets/journal/` (e.g. `the-equipment.jpg`, `the-process.jpg`). Entries
 without an image show a gray placeholder. Any shape works; thumbnails are cropped to 3:2.
@@ -35,3 +35,6 @@ Push to `main`; in repo Settings → Pages set Source to **GitHub Actions**.
 
 ## Colors
 All colors are variables at the top of `src/styles/site.css` (dark mode first, then light mode).
+
+## Copyright
+See `COPYRIGHT.md`. Photos may be used by anyone as long as they credit Marcus Rust.

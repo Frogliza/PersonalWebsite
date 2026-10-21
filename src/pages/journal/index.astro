@@ -14,6 +14,7 @@ import { url } from '../../data/photos';
             ? <Image src={e.thumb} alt="" width={Math.min(800, e.thumb.width)} />
             : <span class="ph" aria-hidden="true"></span>}
           <span class="cap">{e.title}</span>
+          <span class="blurb">{e.summary}</span>
         </a>
       </li>
     ))}
