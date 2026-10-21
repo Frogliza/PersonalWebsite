@@ -10,6 +10,7 @@
 - Astro makes the thumbnails and page-sized images itself.
 - Optional details go in `src/data/photos.ts`: `subject`, `date`, and the Google Drive
   `full` link. The subject and date show above the photo without labels.
+  Photos are sorted newest first by `date` (use `March 2026`, `March 14, 2026` or `2026-03-14`).
 
 ## Journal
 Entries live in `src/data/journal.ts` (title, short description + paragraphs). Each one gets its own page.
