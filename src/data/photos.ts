@@ -12,25 +12,17 @@ export type Category = (typeof categories)[number]['key'];
 export const url = (path: string) => import.meta.env.BASE_URL.replace(/\/$/, '') + path;
 
 /* OPTIONAL details for a photo, keyed by 'category/filename'. Every field is optional.
-   A photo with no entry still appears; its title comes from the filename.
-   `full` is the public Google Drive link that powers the "Full resolution" button. */
-type Details = {
-  title?: string;
-  date?: string;
-  location?: string;
-  camera?: string;
-  settings?: string;
-  info?: string;
-  full?: string;
-};
+     subject: name of the subject (defaults to the filename)
+     date:    when it was taken, worded how you want it shown (e.g. 'March 2026')
+     notes:   a short optional note
+     full:    public Google Drive link for the "Full resolution" button
+   The photo page shows the values only, without labels. */
+type Details = { subject?: string; date?: string; notes?: string; full?: string };
 const details: Record<string, Details> = {
   // 'astro/orion-nebula.jpg': {
-  //   title: 'Orion Nebula',
+  //   subject: 'Orion Nebula',
   //   date: 'March 2026',
-  //   location: 'Location',
-  //   camera: 'Camera and lens',
-  //   settings: 'Exposure settings',
-  //   info: 'A few sentences about the photo.',
+  //   notes: 'Optional short note.',
   //   full: 'https://drive.google.com/file/d/FILE_ID/view?usp=sharing',
   // },
 };
@@ -41,7 +33,7 @@ const modules = import.meta.glob<{ default: ImageMetadata }>(
   { eager: true }
 );
 
-export type Photo = Details & { slug: string; category: Category; file: string; title: string; img: ImageMetadata };
+export type Photo = Details & { slug: string; category: Category; file: string; subject: string; img: ImageMetadata };
 
 export const photos: Photo[] = Object.entries(modules)
   .map(([path, mod]) => {
@@ -49,7 +41,7 @@ export const photos: Photo[] = Object.entries(modules)
     const category = file.split('/')[0] as Category;
     const name = file.split('/')[1].replace(/\.[^.]+$/, '');
     const d = details[file] ?? {};
-    return { ...d, slug: `${category}-${name}`, category, file, img: mod.default, title: d.title ?? name.replace(/[-_]+/g, ' ') };
+    return { ...d, slug: `${category}-${name}`, category, file, img: mod.default, subject: d.subject ?? name.replace(/[-_]+/g, ' ') };
   })
   .filter((p) => categories.some((c) => c.key === p.category))
   .sort((a, b) => a.file.localeCompare(b.file));

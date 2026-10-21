@@ -1,0 +1,15 @@
+---
+import Base from '../../layouts/Base.astro';
+import { entries } from '../../data/journal';
+
+export function getStaticPaths() {
+  return entries.map((e) => ({ params: { slug: e.slug }, props: { entry: e } }));
+}
+const { entry } = Astro.props;
+---
+<Base section="journal" title={`${entry.title} – Marcus Rust`} about>
+  <div class="prose">
+    <h1>{entry.title}</h1>
+    {entry.body.map((para) => <p>{para}</p>)}
+  </div>
+</Base>

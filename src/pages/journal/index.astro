@@ -1,0 +1,15 @@
+---
+import Base from '../../layouts/Base.astro';
+import { entries } from '../../data/journal';
+import { url } from '../../data/photos';
+---
+<Base section="journal" title="Journal – Marcus Rust">
+  <div class="prose">
+    <h1>Journal</h1>
+    <ul class="entries">
+      {entries.map((e) => (
+        <li><a href={url(`/journal/${e.slug}/`)}>{e.title}</a></li>
+      ))}
+    </ul>
+  </div>
+</Base>

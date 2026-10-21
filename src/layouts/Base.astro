@@ -1,10 +1,11 @@
 ---
 import '../styles/site.css';
 import { url } from '../data/photos';
+import AboutFooter from '../components/AboutFooter.astro';
 
-interface Props { title?: string; section?: 'gallery' | 'blog' | 'about' }
-const { title = 'Marcus Rust – Photography', section } = Astro.props;
-const nav = [['gallery', 'Gallery', '/'], ['blog', 'Blog', '/blog/'], ['about', 'About', '/about/']];
+interface Props { title?: string; section?: 'gallery' | 'journal' | 'contact'; about?: boolean }
+const { title = 'Marcus Rust – Photography', section, about } = Astro.props;
+const nav = [['gallery', 'Gallery', '/'], ['journal', 'Journal', '/journal/'], ['contact', 'Contact', '/contact/']];
 ---
 <!doctype html>
 <html lang="en" data-theme="dark">
@@ -30,6 +31,7 @@ const nav = [['gallery', 'Gallery', '/'], ['blog', 'Blog', '/blog/'], ['about', 
     </button>
   </header>
   <main class="page"><slot /></main>
+  {about && <AboutFooter />}
   <footer class="foot">© {new Date().getFullYear()} Marcus Rust</footer>
 
   <script>

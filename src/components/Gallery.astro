@@ -19,8 +19,8 @@ const list = photos.filter((p) => p.category === category);
 ) : (
   <div class="grid">
     {list.map((p) => (
-      <a class="tile" href={url(`/photo/${p.slug}/`)} aria-label={`View ${p.title}`}>
-        <Image src={p.img} alt={p.title} width={Math.min(800, p.img.width)} />
+      <a class="tile" href={url(`/photo/${p.slug}/`)} aria-label={`View ${p.subject}`}>
+        <Image src={p.img} alt={p.subject} width={Math.min(800, p.img.width)} />
       </a>
     ))}
   </div>

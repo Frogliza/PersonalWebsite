@@ -1,18 +1,31 @@
 # Marcus Rust – photography site (Astro)
 
-## First-time setup
+## Preview
 1. Install Node.js 20 or newer (nodejs.org).
-2. In this folder run `npm install` (this creates `package-lock.json`; commit it).
-3. Run `npm run dev` and open http://localhost:4321 to preview.
+2. In this folder run `npm install`, then `npm run dev`, and open http://localhost:4321.
 
 ## Adding photos
 - Put one web-sized JPEG per photo (about 2400px on the long edge) in
   `src/assets/photos/astro/`, `nature/` or `misc/`. Use lowercase names like `orion-nebula.jpg`.
-- Astro makes the thumbnails and page-sized images itself. Nothing else to export.
-- Optional: add a title, date, location, camera, settings, description and the Google Drive
-  "Full resolution" link in `src/data/photos.ts`.
+- Astro makes the thumbnails and page-sized images itself.
+- Optional details go in `src/data/photos.ts`: `subject`, `date`, `notes`, and the Google Drive
+  `full` link. They show on the photo page without labels.
+
+## Journal
+Entries live in `src/data/journal.ts` (title + paragraphs). Each one gets its own page.
+
+## Contact form (EmailJS: sends to your email without showing it)
+1. Create a free account at emailjs.com.
+2. Add an email service (connect your Gmail) and note its **Service ID**.
+3. Create an email template. Set **To Email** to your address (it stays in EmailJS, not on the site),
+   **Reply To** to `{{email}}`, the subject to `{{subject}}`, and put `{{name}}`, `{{email}}` and
+   `{{message}}` in the body. Note its **Template ID**.
+4. Copy your **Public Key** (Account page).
+5. Paste the three values into `SERVICE_ID`, `TEMPLATE_ID` and `PUBLIC_KEY` in `src/pages/contact.astro`.
+6. Run `npm install` (the form uses the `@emailjs/browser` package), commit the updated
+   `package-lock.json`, and send yourself a test message.
+These three values are visible in the page's code by design. Check EmailJS's current free-plan limits.
 
 ## Publishing
-1. In `astro.config.mjs`, set `site` to your address (and `base` if the repo isn't named `yourusername.github.io`).
-2. Push to GitHub (branch `main`).
-3. Repo Settings → Pages → Source: **GitHub Actions**. Every push then rebuilds and publishes the site.
+`site` in `astro.config.mjs` is set to https://marcusrust.com and `public/CNAME` holds the domain.
+Push to `main`; in repo Settings → Pages set Source to **GitHub Actions**.

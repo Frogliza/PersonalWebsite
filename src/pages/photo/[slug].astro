@@ -16,30 +16,27 @@ export function getStaticPaths() {
 
 const { photo: p, prev, next, count } = Astro.props;
 const cat = categories.find((c) => c.key === p.category);
-const rows = [['Date', p.date], ['Location', p.location], ['Camera', p.camera], ['Settings', p.settings]].filter(([, v]) => v);
 ---
-<Base section="gallery" title={`${p.title} – Marcus Rust`}>
+<Base section="gallery" title={`${p.subject} – Marcus Rust`} about>
   <a class="back" href={url(cat.href)} aria-label={`Back to ${cat.label}`} title={`Back to ${cat.label}`}>
     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>
   </a>
 
-  <div class="big">
-    <Image src={p.img} alt={p.title} width={Math.min(2400, p.img.width)} loading="eager" />
+  <div class="view" style={`--ratio:${p.img.width / p.img.height}`}>
+    <div class="big">
+      <Image src={p.img} alt={p.subject} width={Math.min(2400, p.img.width)} loading="eager" />
+    </div>
+    <!-- Description fields: subject, date, notes. Shown without labels. -->
+    <div class="desc">
+      <h1>{p.subject}</h1>
+      {p.date && <p class="date">{p.date}</p>}
+      {p.notes && <p class="notes">{p.notes}</p>}
+    </div>
   </div>
 
   {p.full && (
     <p class="actions"><a class="fullbtn" href={p.full} target="_blank" rel="noopener">Full resolution</a></p>
   )}
-
-  <div class="info">
-    <div>
-      <h1>{p.title}</h1>
-      {p.info && <p>{p.info}</p>}
-    </div>
-    {rows.length > 0 && (
-      <dl>{rows.map(([k, v]) => (<><dt>{k}</dt><dd>{v}</dd></>))}</dl>
-    )}
-  </div>
 
   {count > 1 && (
     <nav class="pn" aria-label={`More ${cat.label} photos`}>
