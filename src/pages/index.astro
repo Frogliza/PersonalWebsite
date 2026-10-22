@@ -1,7 +1,10 @@
 ---
 import Base from '../layouts/Base.astro';
+import CatNav from '../components/CatNav.astro';
 import Gallery from '../components/Gallery.astro';
+import { items } from '../data/photos';
 ---
 <Base section="gallery">
-  <Gallery category="astro" />
+  <CatNav active="all" />
+  <Gallery items={items} from />
 </Base>

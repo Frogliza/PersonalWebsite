@@ -1,0 +1,13 @@
+---
+import { categories, url } from '../data/photos';
+
+const { active } = Astro.props;
+---
+<nav class="cats" aria-label="Categories">
+  {categories.map((c, i) => (
+    <>
+      {i > 0 && <span aria-hidden="true">•</span>}
+      <a href={url(c.href)} aria-current={c.key === active ? 'page' : undefined}>{c.label}</a>
+    </>
+  ))}
+</nav>

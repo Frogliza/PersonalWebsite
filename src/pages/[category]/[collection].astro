@@ -1,0 +1,21 @@
+---
+import Base from '../../layouts/Base.astro';
+import CatNav from '../../components/CatNav.astro';
+import Gallery from '../../components/Gallery.astro';
+import { collectionList, items, url } from '../../data/photos';
+
+export function getStaticPaths() {
+  return collectionList.map((c) => ({ params: { category: c.category, collection: c.key }, props: { c } }));
+}
+const { c } = Astro.props;
+const list = items.filter((i) => i.category === c.category && i.collection === c.key);
+---
+<Base section="gallery" title={`${c.label} – Marcus Rust`}>
+  <div class="catbar">
+    <a class="back" href={url(`/${c.category}/`)} aria-label="Back to collections" title="Back to collections">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>
+    </a>
+    <CatNav active={c.category} />
+  </div>
+  <Gallery items={list} />
+</Base>

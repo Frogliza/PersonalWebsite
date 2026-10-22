@@ -1,14 +1,35 @@
 ---
+import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
-import Gallery from '../components/Gallery.astro';
-import { categories } from '../data/photos';
+import CatNav from '../components/CatNav.astro';
+import { categories, collectionList, url } from '../data/photos';
 
 export function getStaticPaths() {
-  return categories.filter((c) => c.key !== 'astro').map((c) => ({ params: { category: c.key } }));
+  return categories.filter((c) => c.key !== 'all').map((c) => ({ params: { category: c.key } }));
 }
 const { category } = Astro.params;
 const label = categories.find((c) => c.key === category)?.label;
+const list = collectionList.filter((c) => c.category === category);
 ---
 <Base section="gallery" title={`${label} – Marcus Rust`}>
-  <Gallery category={category} />
+  <CatNav active={category} />
+  <ul class="piles">
+    {list.map((c) => (
+      <li>
+        <a class="pile" href={url(`/${c.category}/${c.key}/`)}>
+          <span class="stack">
+            <span class="sheet s1"></span>
+            <span class="sheet s2"></span>
+            <span class="top">
+              {c.coverImg
+                ? <Image src={c.coverImg} alt="" width={Math.min(800, c.coverImg.width)} />
+                : <span class="nocover"></span>}
+            </span>
+          </span>
+          <span class="pname">{c.label}</span>
+          <span class="pcount">{c.count} {c.count === 1 ? 'photo' : 'photos'}</span>
+        </a>
+      </li>
+    ))}
+  </ul>
 </Base>

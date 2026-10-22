@@ -1,33 +1,23 @@
 ---
 import { Image } from 'astro:assets';
-import { categories, photos, url } from '../data/photos';
+import { url } from '../data/photos';
 
-const { category } = Astro.props;
-const list = photos.filter((p) => p.category === category);
+const { items, from = false } = Astro.props;
 
 /* Four photos per row on desktop. */
 const perRow = 4;
 const rows = [];
-for (let i = 0; i < list.length; i += perRow) rows.push(list.slice(i, i + perRow));
+for (let i = 0; i < items.length; i += perRow) rows.push(items.slice(i, i + perRow));
 ---
-<nav class="cats" aria-label="Categories">
-  {categories.map((c, i) => (
-    <>
-      {i > 0 && <span aria-hidden="true">•</span>}
-      <a href={url(c.href)} aria-current={c.key === category ? 'page' : undefined}>{c.label}</a>
-    </>
-  ))}
-</nav>
-
-{list.length === 0 ? (
-  <p class="empty">No photos in this category yet.</p>
+{items.length === 0 ? (
+  <p class="empty">No photos here yet.</p>
 ) : (
   <div class="grid">
     {rows.map((row) => (
       <div class={row.length < perRow ? 'row last' : 'row'}>
-        {row.map((p) => (
-          <a class="tile" href={url(`/photo/${p.slug}/`)} aria-label={`View ${p.subject}`} style={`--r:${p.img.width / p.img.height}`}>
-            <Image src={p.img} alt={p.subject} width={Math.min(1200, p.img.width)} />
+        {row.map((it) => (
+          <a class="tile" href={url(`/photo/${it.slug}/`) + (from ? '?from=all' : '')} aria-label={`View ${it.name}`} style={`--r:${it.lead.img.width / it.lead.img.height}`}>
+            <Image src={it.lead.img} alt={it.name} width={Math.min(1200, it.lead.img.width)} />
           </a>
         ))}
       </div>

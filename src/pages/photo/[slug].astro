@@ -1,46 +1,93 @@
 ---
 import { Image } from 'astro:assets';
 import Base from '../../layouts/Base.astro';
-import { categories, photos, url } from '../../data/photos';
+import { items, url } from '../../data/photos';
 
 export function getStaticPaths() {
-  return photos.map((p) => {
-    const same = photos.filter((x) => x.category === p.category);
-    const i = same.indexOf(p);
+  return items.map((it) => {
+    const same = items.filter((x) => x.category === it.category && x.collection === it.collection);
+    const i = same.indexOf(it);
     return {
-      params: { slug: p.slug },
-      props: { photo: p, prev: same[(i - 1 + same.length) % same.length], next: same[(i + 1) % same.length], count: same.length },
+      params: { slug: it.slug },
+      props: { item: it, prev: same[(i - 1 + same.length) % same.length], next: same[(i + 1) % same.length], count: same.length },
     };
   });
 }
 
-const { photo: p, prev, next, count } = Astro.props;
-const cat = categories.find((c) => c.key === p.category);
+const { item, prev, next, count } = Astro.props;
+const backHref = url(item.collection ? `/${item.category}/${item.collection}/` : `/${item.category}/`);
+const single = item.photos.length === 1;
 ---
-<Base section="gallery" title={`${p.subject} – Marcus Rust`} about>
-  <a class="back" href={url(cat.href)} aria-label={`Back to ${cat.label}`} title={`Back to ${cat.label}`}>
+<Base section="gallery" title={`${item.name} – Marcus Rust`} about>
+  <a class="back" id="back" href={backHref} data-all={url('/')} aria-label="Back" title="Back">
     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>
   </a>
 
-  <div class="view" style={`--ratio:${p.img.width / p.img.height}`}>
-    <!-- Description fields: subject and date. Shown without labels. -->
+  <div class={single ? 'view single' : 'view'}>
+    <!-- Caption: name, scientific name, date. Shown without labels. -->
     <div class="desc">
-      <h1>{p.subject}</h1>
-      {p.date && <p class="date">{p.date}</p>}
+      <h1>{item.name}</h1>
+      {item.scientific && <p class="sci">{item.scientific}</p>}
+      {item.date && <p class="date">{item.date}</p>}
     </div>
-    <div class="big">
-      <Image src={p.img} alt={p.subject} width={Math.min(2400, p.img.width)} loading="eager" />
+
+    <div class="shots">
+      {item.photos.map((p, i) => (
+        <figure class="shot" style={`--ratio:${p.img.width / p.img.height}`}>
+          <div class="big">
+            <Image src={p.img} alt={single ? item.name : `${item.name} (${i + 1} of ${item.photos.length})`} width={Math.min(2400, p.img.width)} loading={i === 0 ? 'eager' : 'lazy'} />
+          </div>
+          {p.full && (
+            <p class="actions"><a class="fullbtn" href={p.full} target="_blank" rel="noopener">Full resolution</a></p>
+          )}
+        </figure>
+      ))}
     </div>
   </div>
 
-  {p.full && (
-    <p class="actions"><a class="fullbtn" href={p.full} target="_blank" rel="noopener">Full resolution</a></p>
+  {count > 1 && (
+    <>
+      <a class="arrow prev" data-nav href={url(`/photo/${prev.slug}/`)} aria-label="Previous photo">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg>
+      </a>
+      <a class="arrow next" data-nav href={url(`/photo/${next.slug}/`)} aria-label="Next photo">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
+      </a>
+      <nav class="pn" aria-label="More photos">
+        <a data-nav href={url(`/photo/${prev.slug}/`)}>Previous</a>
+        <a data-nav href={url(`/photo/${next.slug}/`)}>Next</a>
+      </nav>
+    </>
   )}
 
-  {count > 1 && (
-    <nav class="pn" aria-label={`More ${cat.label} photos`}>
-      <a href={url(`/photo/${prev.slug}/`)}>Previous</a>
-      <a href={url(`/photo/${next.slug}/`)}>Next</a>
-    </nav>
-  )}
+  <script>
+    /* Coming from the All Photos page: keep that context for the back arrow and the next/previous links. */
+    if (new URLSearchParams(location.search).get('from') === 'all') {
+      document.querySelectorAll('[data-nav]').forEach((a) => { a.href += '?from=all'; });
+      const back = document.getElementById('back');
+      if (back) back.href = back.dataset.all;
+    }
+
+    /* Swipe left/right (touch screens) and the left/right arrow keys change photo. */
+    const prev = document.querySelector('.arrow.prev');
+    const next = document.querySelector('.arrow.next');
+    const go = (a) => { if (a) location.href = a.href; };
+    let sx = 0, sy = 0, tracking = false;
+    addEventListener('touchstart', (e) => {
+      tracking = e.touches.length === 1 && !(window.visualViewport && window.visualViewport.scale > 1.01);
+      if (tracking) { sx = e.touches[0].clientX; sy = e.touches[0].clientY; }
+    }, { passive: true });
+    addEventListener('touchend', (e) => {
+      if (!tracking) return;
+      tracking = false;
+      const dx = e.changedTouches[0].clientX - sx;
+      const dy = e.changedTouches[0].clientY - sy;
+      if (Math.abs(dx) < 60 || Math.abs(dx) < Math.abs(dy) * 1.5) return;
+      go(dx < 0 ? next : prev);
+    }, { passive: true });
+    addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowLeft') go(prev);
+      if (e.key === 'ArrowRight') go(next);
+    });
+  </script>
 </Base>
