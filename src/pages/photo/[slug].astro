@@ -28,6 +28,7 @@ const single = item.photos.length === 1;
     <div class="desc">
       <h1>{item.name}</h1>
       {item.scientific && <p class="sci">{item.scientific}</p>}
+      {item.catalog && <p class="sci catalog">{item.catalog}</p>}
       {item.date && <p class="date">{item.date}</p>}
     </div>
 

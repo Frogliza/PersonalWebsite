@@ -1,5 +1,6 @@
 import type { ImageMetadata } from 'astro';
 import { species } from './species';
+import { objects } from './objects';
 
 export type Category = 'astro' | 'nature' | 'misc';
 
@@ -34,30 +35,32 @@ export const collections: { category: Category; key: string; label: string; cove
      collection: which collection it belongs to (a key from the list above)
      species:    key from species.ts. Photos with the same species show as ONE tile, and the
                  photo page shows all of them in a column.
+     object:     key from objects.ts, for galaxies and nebulae (adds a catalog name like M101).
+                 Photos with the same object are grouped the same way.
      lead:       true on the photo that should represent its species (default: the newest)
      date:       when it was taken, e.g. 'March 2026', 'March 14, 2026' or '2026-03-14'.
                  Photos are shown newest first; photos without a readable date come last.
      full:       public Google Drive link for the "Full resolution" button
    The photo page shows the name, scientific name and date only, without labels. */
-type Details = { subject?: string; collection?: string; species?: string; lead?: boolean; date?: string; full?: string };
+type Details = { subject?: string; collection?: string; species?: string; object?: string; lead?: boolean; date?: string; full?: string };
 const details: Record<string, Details> = {
   // ---------- astro
   'astro/2024-solar-eclipse.jpg': { subject: '2024 Solar Eclipse', collection: 'more', date: '', full: '' },
   'astro/aurora-pillars.jpg': { subject: 'Aurora Pillars', collection: 'more', date: '', full: '' },
   'astro/aurora-pine.jpg': { subject: 'Aurora Pine', collection: 'more', date: '', full: '' },
   'astro/coathanger-asterism.jpg': { subject: 'Coathanger Asterism', collection: 'more', date: '', full: '' },
-  'astro/crescent-nebula.jpg': { subject: 'Crescent Nebula', collection: 'nebulae', date: '', full: '' },
-  'astro/elephant-trunk-nebula.jpg': { subject: 'Elephant Trunk Nebula', collection: 'nebulae', date: '', full: '' },
+  'astro/crescent-nebula.jpg': { subject: 'Crescent Nebula', collection: 'nebulae', object: 'crescent-nebula', date: '', full: '' },
+  'astro/elephant-trunk-nebula.jpg': { subject: 'Elephant Trunk Nebula', collection: 'nebulae', object: 'elephant-trunk-nebula', date: '', full: '' },
   'astro/gecko-nebula.jpg': { subject: 'Gecko Nebula', collection: 'nebulae', date: '', full: '' },
   'astro/milkyway-over-elbert.jpg': { subject: 'Milkyway Over Elbert', collection: 'more', date: '', full: '' },
   'astro/nebulae-of-cygnus.jpg': { subject: 'Nebulae Of Cygnus', collection: 'nebulae', date: '', full: '' },
   'astro/nebulae-of-monoceros.jpg': { subject: 'Nebulae Of Monoceros', collection: 'nebulae', date: '', full: '' },
-  'astro/north-america-and-pelican-nebulae.jpg': { subject: 'North America And Pelican Nebulae', collection: 'nebulae', date: '', full: '' },
-  'astro/orion-nebula.jpg': { subject: 'Orion Nebula', collection: 'nebulae', date: 'November 2024', full: 'https://drive.google.com/file/d/1HXRJZqom2ueJr-fdzx898qJWd0JgYULw/view?usp=sharing' },
-  'astro/pinwheel-galaxy.jpg': { subject: 'Pinwheel Galaxy', collection: 'galaxies', date: '', full: '' },
+  'astro/north-america-and-pelican-nebulae.jpg': { subject: 'North America And Pelican Nebulae', collection: 'nebulae', object: 'north-america-and-pelican-nebulae', date: '', full: '' },
+  'astro/orion-nebula.jpg': { subject: 'Orion Nebula', collection: 'nebulae', object: 'orion-nebula', date: 'November 2024', full: 'https://drive.google.com/file/d/1HXRJZqom2ueJr-fdzx898qJWd0JgYULw/view?usp=sharing' },
+  'astro/pinwheel-galaxy.jpg': { subject: 'Pinwheel Galaxy', collection: 'galaxies', object: 'pinwheel-galaxy', date: '', full: '' },
   'astro/snr-g653-57.jpg': { subject: 'SNR G65.3+5.7', collection: 'nebulae', date: '', full: '' },
   'astro/veil-nebula.jpg': { subject: 'Veil Nebula', collection: 'nebulae', date: '', full: '' },
-  'astro/whirlpool-galaxy.jpg': { subject: 'Whirlpool Galaxy', collection: 'galaxies', date: '', full: '' },
+  'astro/whirlpool-galaxy.jpg': { subject: 'Whirlpool Galaxy', collection: 'galaxies', object: 'whirlpool-galaxy', date: '', full: '' },
 
   // ---------- nature
   'nature/alligator-environment.jpg': { subject: 'Alligator Environment', collection: 'reptiles-and-amphibians', species: 'alligator', date: '', full: '' },
@@ -157,25 +160,27 @@ export const photos: Photo[] = Object.entries(modules)
 /* ITEMS: what the galleries show. Photos of the same species become one item. */
 export type Item = {
   slug: string; category: Category; collection: string; name: string;
-  scientific?: string; date?: string; photos: Photo[]; lead: Photo;
+  scientific?: string; catalog?: string; date?: string; photos: Photo[]; lead: Photo;
 };
 
 const groups = new Map<string, Photo[]>();
 for (const p of photos) {
-  const key = p.species ? 's:' + p.species : 'p:' + p.slug;
+  const key = p.species ? 's:' + p.species : p.object ? 'o:' + p.object : 'p:' + p.slug;
   groups.set(key, [...(groups.get(key) ?? []), p]);
 }
 
 export const items: Item[] = [...groups.values()].map((list) => {
   const lead = list.find((p) => p.lead) ?? list[0];
   const sp = lead.species ? species[lead.species] : undefined;
+  const ob = lead.object ? objects[lead.object] : undefined;
   const dates = [...new Set(list.map((p) => p.date).filter(Boolean))] as string[];
   return {
-    slug: lead.species ?? lead.slug,
+    slug: lead.species ?? lead.object ?? lead.slug,
     category: lead.category,
     collection: lead.collection ?? '',
-    name: list.length > 1 ? (sp?.name ?? lead.subject) : lead.subject,
+    name: list.length > 1 ? (sp?.name ?? ob?.name ?? lead.subject) : lead.subject,
     scientific: sp?.scientific || undefined,
+    catalog: ob?.catalog || undefined,
     date: dates.length === 1 ? dates[0] : undefined,
     photos: [lead, ...list.filter((p) => p !== lead)],
     lead,

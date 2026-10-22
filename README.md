@@ -16,6 +16,8 @@
 - **Same species:** give every photo of the same animal the same `species` key. They show as one tile,
   and the photo page lists all of them in a column under one caption. The key's common and scientific
   name live in `src/data/species.ts`. Add `lead: true` to a photo to make it the one shown in the galleries.
+- **Galaxies and nebulae:** add `object: 'key'` to the photo's line. The catalog name (M101, NGC 6888)
+  lives in `src/data/objects.ts` and shows under the name, like a scientific name.
 
 ## Journal
 Entries live in `src/data/journal.ts` (title, short description + paragraphs). Each one gets its own page.
