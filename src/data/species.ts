@@ -49,4 +49,5 @@ export const species: Record<string, { name: string; scientific?: string }> = {
   'yellow-crystal-macro': { name: 'Orange Crystals', scientific: 'Unknown' },
   'squirrel': { name: 'Rock Squirrel', scientific: 'Otospermophilus variegatus' },
   'green-sweat-bee': { name: 'Pure Green Sweat Bee', scientific: 'Augochlora pura' },
+  'katydid-munching-leaf':{ name: 'Katydid', scientific: 'Family Tettigoniidae' },
 };
