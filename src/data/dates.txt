@@ -7,26 +7,26 @@
 # to see when each original photo was shot.
 
 # ---------- astro / galaxies
-astro/pinwheel-galaxy.jpg =
+astro/pinwheel-galaxy.jpg = May 2024
 astro/whirlpool-galaxy.jpg =
 
 # ---------- astro / nebulae
 astro/crescent-nebula.jpg =
-astro/elephant-trunk-nebula.jpg =
-astro/gecko-nebula.jpg =
-astro/nebulae-of-cygnus.jpg =
-astro/nebulae-of-monoceros.jpg =
-astro/north-america-and-pelican-nebulae.jpg =
+astro/elephant-trunk-nebula.jpg = September 2026
+astro/gecko-nebula.jpg = June 2024
+astro/nebulae-of-cygnus.jpg = July 2024
+astro/nebulae-of-monoceros.jpg = November 2023
+astro/north-america-and-pelican-nebulae.jpg = June 2024
 astro/orion-nebula.jpg = November 2024
-astro/snr-g653-57.jpg =
-astro/veil-nebula.jpg =
+astro/snr-g653-57.jpg = August 2024
+astro/veil-nebula.jpg = 
 
 # ---------- astro / more
-astro/2024-solar-eclipse.jpg =
+astro/2024-solar-eclipse.jpg = April 2024
 astro/aurora-pillars.jpg =
 astro/aurora-pine.jpg =
-astro/coathanger-asterism.jpg =
-astro/milkyway-over-elbert.jpg =
+astro/coathanger-asterism.jpg = June 2024
+astro/milkyway-over-elbert.jpg = August 2024
 
 # ---------- nature / birds
 nature/anhinga.jpg =
