@@ -4,17 +4,24 @@ import Base from '../../layouts/Base.astro';
 import { items, url } from '../../data/photos';
 
 export function getStaticPaths() {
-  return items.map((it) => {
+  return items.map((it, k) => {
     const same = items.filter((x) => x.category === it.category && x.collection === it.collection);
     const i = same.indexOf(it);
     return {
       params: { slug: it.slug },
-      props: { item: it, prev: same[(i - 1 + same.length) % same.length], next: same[(i + 1) % same.length], count: same.length },
+      props: {
+        item: it,
+        prev: same[(i - 1 + same.length) % same.length],
+        next: same[(i + 1) % same.length],
+        count: same.length,
+        allPrev: items[(k - 1 + items.length) % items.length],
+        allNext: items[(k + 1) % items.length],
+      },
     };
   });
 }
 
-const { item, prev, next, count } = Astro.props;
+const { item, prev, next, count, allPrev, allNext } = Astro.props;
 const backHref = url(item.collection ? `/${item.category}/${item.collection}/` : `/${item.category}/`);
 const single = item.photos.length === 1;
 
@@ -26,13 +33,13 @@ const ogUrl = new URL(og.src, Astro.site ?? 'https://marcusrust.com').href;
 const sub = item.scientific ?? item.catalog;
 const description = `${item.name}${sub ? ` (${sub})` : ''}. Photograph by Marcus Rust.`;
 ---
-<Base section="gallery" title={`${item.name} – Marcus Rust`} description={description} image={ogUrl} about>
+<Base section="gallery" title={`${item.name} – Marcus Rust`} description={description} image={ogUrl}>
   <a class="back" id="back" href={backHref} data-all={url('/')} aria-label="Back" title="Back">
     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>
   </a>
 
   <div class={single ? 'view single' : 'view'}>
-    <!-- Caption: name, scientific name, date. Shown without labels. -->
+    <!-- Caption: name, scientific or catalog name, date. Shown without labels. -->
     <div class="desc">
       <h1>{item.name}</h1>
       {item.scientific && <p class="sci">{item.scientific}</p>}
@@ -43,6 +50,7 @@ const description = `${item.name}${sub ? ` (${sub})` : ''}. Photograph by Marcus
     <div class="shots">
       {item.photos.map((p, i) => (
         <figure class="shot" style={`--ratio:${p.img.width / p.img.height}`}>
+          {i > 0 && p.date && p.date !== item.date && <p class="shotdate">{p.date}</p>}
           <div class="big">
             <Image src={p.img} alt={single ? item.name : `${item.name} (${i + 1} of ${item.photos.length})`} width={Math.min(2400, p.img.width)} loading={i === 0 ? 'eager' : 'lazy'} />
           </div>
@@ -54,25 +62,23 @@ const description = `${item.name}${sub ? ` (${sub})` : ''}. Photograph by Marcus
     </div>
   </div>
 
-  {count > 1 && (
-    <>
-      <a class="arrow prev" data-nav href={url(`/photo/${prev.slug}/`)} aria-label="Previous photo">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg>
-      </a>
-      <a class="arrow next" data-nav href={url(`/photo/${next.slug}/`)} aria-label="Next photo">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
-      </a>
-      <nav class="pn" aria-label="More photos">
-        <a data-nav href={url(`/photo/${prev.slug}/`)}>Previous</a>
-        <a data-nav href={url(`/photo/${next.slug}/`)}>Next</a>
-      </nav>
-    </>
-  )}
+  <!-- Previous/next stay inside the collection. Coming from All Photos, the script below swaps in the All Photos order. -->
+  <a class="arrow prev" data-nav data-all={url(`/photo/${allPrev.slug}/`)} href={url(`/photo/${prev.slug}/`)} hidden={count < 2} aria-label="Previous photo">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg>
+  </a>
+  <a class="arrow next" data-nav data-all={url(`/photo/${allNext.slug}/`)} href={url(`/photo/${next.slug}/`)} hidden={count < 2} aria-label="Next photo">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
+  </a>
+  <nav class="pn" aria-label="More photos" hidden={count < 2}>
+    <a data-nav data-all={url(`/photo/${allPrev.slug}/`)} href={url(`/photo/${prev.slug}/`)}>Previous</a>
+    <a data-nav data-all={url(`/photo/${allNext.slug}/`)} href={url(`/photo/${next.slug}/`)}>Next</a>
+  </nav>
 
   <script>
-    /* Coming from the All Photos page: keep that context for the back arrow and the next/previous links. */
+    /* Coming from the All Photos page: previous/next follow the All Photos order and the back arrow returns there. */
     if (new URLSearchParams(location.search).get('from') === 'all') {
-      document.querySelectorAll('[data-nav]').forEach((a) => { a.href += '?from=all'; });
+      document.querySelectorAll('[data-nav]').forEach((a) => { a.href = a.dataset.all + '?from=all'; });
+      document.querySelectorAll('.arrow, .pn').forEach((e) => { e.hidden = false; });
       const back = document.getElementById('back');
       if (back) back.href = back.dataset.all;
     }
@@ -80,7 +86,7 @@ const description = `${item.name}${sub ? ` (${sub})` : ''}. Photograph by Marcus
     /* Swipe left/right (touch screens) and the left/right arrow keys change photo. */
     const prev = document.querySelector('.arrow.prev');
     const next = document.querySelector('.arrow.next');
-    const go = (a) => { if (a) location.href = a.href; };
+    const go = (a) => { if (a && !a.hidden) location.href = a.href; };
     let sx = 0, sy = 0, tracking = false;
     addEventListener('touchstart', (e) => {
       tracking = e.touches.length === 1 && !(window.visualViewport && window.visualViewport.scale > 1.01);

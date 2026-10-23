@@ -4,7 +4,7 @@ import { url } from '../data/photos';
 import AboutFooter from '../components/AboutFooter.astro';
 
 interface Props { title?: string; section?: 'gallery' | 'journal' | 'contact'; about?: boolean; description?: string; image?: string }
-const { title = 'Marcus Rust – Photography', section, about, description = 'Photography by Marcus Rust: astrophotography, nature and wildlife.', image } = Astro.props;
+const { title = 'Marcus Rust – Photography', section, description = 'Photography by Marcus Rust: astrophotography, nature and wildlife.', image } = Astro.props;
 const siteUrl = Astro.site ?? new URL('https://marcusrust.com');
 const pageUrl = new URL(Astro.url.pathname, siteUrl).href;
 const preview = image ?? new URL(url('/og-default.png'), siteUrl).href;
@@ -48,7 +48,7 @@ const nav = [['gallery', 'Gallery', '/'], ['journal', 'Journal', '/journal/'], [
     </button>
   </header>
   <main class="page"><slot /></main>
-  {about && <AboutFooter />}
+  <AboutFooter />
   <footer class="foot">© {new Date().getFullYear()} Marcus Rust. All Rights Reserved.</footer>
 
   <script>

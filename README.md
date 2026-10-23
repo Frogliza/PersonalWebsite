@@ -8,18 +8,18 @@
 - Put one web-sized JPEG per photo (about 2400px on the long edge) in
   `src/assets/photos/astro/`, `nature/` or `misc/`. Use lowercase names like `orion-nebula.jpg`.
 - Astro makes the thumbnails and page-sized images itself.
-- Every photo shows in **All Photos** (the home page). Give it a line in `src/data/photos.ts`:
-  `subject`, the Google Drive `full` link, `collection` and, for animals, `species`.
-- **Dates:** type each photo's month and year in `src/data/dates.txt` (e.g. `astro/orion-nebula.jpg = November 2024`).
-  Photos are sorted newest first. Typos show up as warnings in the build log.
+- Every photo shows in **All Photos** (the home page). Give each photo one line in `src/data/photos.ts`:
+  `subject` (the display name), `scientific` (animals) or `catalog` (galaxies and nebulae), `collection`,
+  `date` (month and year, e.g. `March 2026`) and the Google Drive `full` link. Photos are sorted newest first.
 - **Collections** (Galaxies, Birds, ...) are listed near the top of `src/data/photos.ts`. To pick a
   collection's thumbnail set its `cover`, e.g. `cover: 'nature/great-blue-heron-in-flight.jpg'`.
   Blank means the newest photo in the collection.
-- **Same species:** give every photo of the same animal the same `species` key. They show as one tile,
-  and the photo page lists all of them in a column under one caption. The key's common and scientific
-  name live in `src/data/species.ts`. Add `lead: true` to a photo to make it the one shown in the galleries.
-- **Galaxies and nebulae:** add `object: 'key'` to the photo's line. The catalog name (M101, NGC 6888)
-  lives in `src/data/objects.ts` and shows under the name, like a scientific name.
+- **Same animal or object:** give those photos the same `group` (e.g. `group: 'alligator'`). They show as one
+  tile, and the photo page lists them in a column. The name, scientific/catalog name and top date come from
+  the lead photo (the newest, or add `lead: true`). The other photos show their own date above them only
+  when it differs from the lead photo's date.
+- **Flipping through photos:** coming from All Photos, Previous/Next follow the All Photos order. Inside a
+  collection they stay in that collection.
 
 ## Journal
 Entries live in `src/data/journal.ts` (title, short description + paragraphs). Each one gets its own page.

@@ -1,6 +1,7 @@
 :root{--bg:#2C3930;--fg:#DCD7C9;--mute:#A9AB9D;--line:#3F4F44;--hold:#3F4F44;--accent:#A27B5C;--accent-text:#C2A084;--focus:#C2A084;--btn-bg:transparent;--btn-fg:#C2A084;--btn-bd:#A27B5C;--btn-hbg:transparent;--btn-hbd:#C2A084;color-scheme:dark}
 :root[data-theme=light]{--bg:#DCD7C9;--fg:#2C3930;--mute:#4F5E53;--line:#BFB9A8;--hold:#CBC6B6;--accent:#A27B5C;--accent-text:#75533A;--focus:#75533A;--btn-bg:#3F4F44;--btn-fg:#DCD7C9;--btn-bd:#3F4F44;--btn-hbg:#2C3930;--btn-hbd:#2C3930;color-scheme:light}
 *{box-sizing:border-box}
+[hidden]{display:none !important}
 body{margin:0;background:var(--bg);color:var(--fg);font:400 16px/1.55 Manrope,system-ui,sans-serif}
 a{color:inherit;text-underline-offset:5px;text-decoration-thickness:1px}
 :focus-visible{outline:3px solid var(--focus);outline-offset:3px}
@@ -55,10 +56,11 @@ a{color:inherit;text-underline-offset:5px;text-decoration-thickness:1px}
 .desc{margin:0 0 20px;text-align:center}
 .desc h1{margin:0 0 4px;font-size:22px;line-height:1.25;font-weight:600;letter-spacing:-.01em}
 .desc .date{margin:0;color:var(--mute);font-size:15px}
-.desc .sci{margin:0;color:var(--mute);font-size:18px;font-style:italic}
-.desc .catalog{margin:0;color:var(--mute);font-size:18px;font-style:italic}
+.desc .sci{margin:0;color:var(--mute);font-size:15px;font-style:italic}
+.desc .catalog{font-style:normal}
 .shots{display:flex;flex-direction:column;align-items:center;gap:32px}
 .shot{margin:0;width:100%}
+.shotdate{margin:0 0 10px;color:var(--mute);font-size:15px;text-align:center}
 .big img{display:block;width:min(calc(74vh * var(--ratio)),100%);height:auto;margin:0 auto;background:var(--hold)}
 .arrow{position:fixed;top:50%;transform:translateY(-50%);display:flex;align-items:center;justify-content:center;width:40px;height:40px;border:1px solid var(--line);border-radius:50%;background:var(--bg);color:var(--fg);text-decoration:none}
 .arrow:hover{border-color:var(--accent)}
@@ -75,8 +77,8 @@ a{color:inherit;text-underline-offset:5px;text-decoration-thickness:1px}
 /* Collections: piles of photos with a tan border */
 .catbar{position:relative}
 .catbar .back{position:absolute;left:0;top:0;margin:0}
-.piles{list-style:none;margin:0;padding:0;display:flex;justify-content:center;gap:40px 32px}
-.piles li{flex:1 1 0;min-width:0;max-width:340px}
+.piles{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;justify-content:center;gap:48px 32px}
+.piles li{flex:0 0 min(calc((100% - 64px) / 3), 600px);min-width:0}
 .pile{display:block;text-align:center;text-decoration:none}
 .stack{position:relative;display:block;aspect-ratio:4/3;margin:14px 12px 0}
 .sheet{position:absolute;inset:0;background:var(--accent);box-shadow:0 1px 5px rgba(0,0,0,.4)}
@@ -108,7 +110,7 @@ a{color:inherit;text-underline-offset:5px;text-decoration-thickness:1px}
 .send:disabled{opacity:.6;cursor:default}
 .status{margin:16px 0 0;color:var(--mute)}
 
-/* About footer (photo pages and journal entries only) */
+/* About footer (every page) */
 .about-foot{padding:32px 48px;border-top:1px solid var(--line);text-align:center;color:var(--mute)}
 .about-foot h2{margin:0 0 10px;color:var(--fg);font-size:18px;font-weight:600;letter-spacing:-.01em}
 .about-foot p{margin:0 0 4px;font-size:15px}
@@ -124,7 +126,7 @@ a{color:inherit;text-underline-offset:5px;text-decoration-thickness:1px}
   .grid{display:block}
   .row{display:block}
   .tile{margin-bottom:12px}
-  .piles{flex-direction:column;align-items:center}
+  .piles{flex-direction:column;flex-wrap:nowrap;align-items:center}
   .piles li{flex:none;width:min(100%,360px)}
 }
 @media (max-width:700px){
