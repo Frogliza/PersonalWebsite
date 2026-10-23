@@ -39,4 +39,6 @@ export const species: Record<string, { name: string; scientific?: string }> = {
   'rocky-mountain-parnassian': { name: 'Rocky Mountain Parnassian', scientific: 'Parnassius smintheus' },
   'sunlight-through-the-bee-wing': { name: 'Eastern Carpenter Bee', scientific: 'Xylocopa virginica' },
   'chachalaca-in-a-tree': { name: 'Gray Chachalaca', scientific: 'Ortalis cinereiceps' },
+  'rainforest-toad': { name: 'Rainforest Toad', scientific: 'Incilius aucoinae' },
+  'red-thighed-bromeliad-spider': { name: 'Red-thighed Bromeliad Spider', scientific: 'Cupiennius coccineus' },
 };
