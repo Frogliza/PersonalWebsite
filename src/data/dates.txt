@@ -1,0 +1,106 @@
+# DATES: type each photo's month and year after the "=".
+#   Example:  astro/orion-nebula.jpg = November 2024
+# Use full month names or 3-letter abbreviations (March 2026 or Mar 2026). A day is optional (March 14, 2026).
+# Photos are shown newest first. Photos with no date come after the dated ones.
+# Lines starting with # are ignored.
+# Tip: in File Explorer (Details view) right-click a column header, choose More, then "Date taken",
+# to see when each original photo was shot.
+
+# ---------- astro / galaxies
+astro/pinwheel-galaxy.jpg =
+astro/whirlpool-galaxy.jpg =
+
+# ---------- astro / nebulae
+astro/crescent-nebula.jpg =
+astro/elephant-trunk-nebula.jpg =
+astro/gecko-nebula.jpg =
+astro/nebulae-of-cygnus.jpg =
+astro/nebulae-of-monoceros.jpg =
+astro/north-america-and-pelican-nebulae.jpg =
+astro/orion-nebula.jpg = November 2024
+astro/snr-g653-57.jpg =
+astro/veil-nebula.jpg =
+
+# ---------- astro / more
+astro/2024-solar-eclipse.jpg =
+astro/aurora-pillars.jpg =
+astro/aurora-pine.jpg =
+astro/coathanger-asterism.jpg =
+astro/milkyway-over-elbert.jpg =
+
+# ---------- nature / birds
+nature/anhinga.jpg =
+nature/bananaquit.jpg =
+nature/black-bellied-whistling-ducks-in-flight.jpg =
+nature/chachalaca-in-a-tree.jpg =
+nature/charming-hummingbird.jpg =
+nature/common-black-hawk-in-flight.jpg =
+nature/common-black-hawk.jpg =
+nature/common-loon.jpg =
+nature/crested-guan.jpg =
+nature/fly-catcher.jpg =
+nature/great-blue-heron-environment.jpg =
+nature/great-blue-heron-in-flight.jpg =
+nature/reddish-egret.jpg =
+nature/road-hawk.jpg =
+nature/scarlet-rumped-tanager.jpg =
+nature/slaty-tailed-trogan.jpg =
+nature/summer-tanager.jpg =
+nature/thick-billed-euphonia.jpg =
+nature/turkey-vulture.jpg =
+nature/yellow-throated-toucan.jpg =
+
+# ---------- nature / mammals
+nature/big-horn-sheep.jpg =
+nature/central-american-spider-monkey-mother.jpg =
+nature/central-american-squirrel-monkey.jpg =
+nature/central-american-white-faced-capuchin-looking.jpg =
+nature/central-american-white-faced-capuchin-portrait.jpg =
+nature/central-american-white-faced-capuchin.jpg =
+nature/howler-monkey.jpg =
+nature/humpback-whale-with-calf.jpg =
+nature/northern-tamandua.jpg =
+nature/squirrel.jpg =
+
+# ---------- nature / reptiles-and-amphibians
+nature/alligator-environment.jpg =
+nature/alligator-mother.jpg =
+nature/black-spiny-tailed-iguana-portrait.jpg =
+nature/common-blunt-headed-tree-snake-close.jpg =
+nature/common-blunt-headed-tree-snake-periscope.jpg =
+nature/common-blunt-headed-tree-snake-portrait.jpg =
+nature/eastern-garter-portrait.jpg =
+nature/gopher-tortoise.jpg =
+nature/granular-poison-frog.jpg =
+nature/ornate-cat-eyed-snake-portrait.jpg =
+nature/ornate-cat-eyed-snake.jpg =
+nature/prairie-lizard.jpg =
+nature/rainforest-toad.jpg =
+nature/terciopelo-baby.jpg =
+nature/terciopelo-through-the-grass.jpg =
+nature/tropical-flat-snake-gaze.jpg =
+nature/tropical-flat-snake-portrait.jpg =
+nature/tropical-flat-snake-wide-portrait.jpg =
+
+# ---------- nature / arthropods
+nature/blue-morpho-wing.jpg =
+nature/fly-on-yellow-flower.jpg =
+nature/green-sweat-bee.jpg =
+nature/katydid-munching-leaf.jpg =
+nature/leaf-cutter-ant-focus.jpg =
+nature/leaf-cutter-ant-march.jpg =
+nature/leaf-cutter-ant-standoff.jpg =
+nature/orange-butterfly.jpg =
+nature/red-thighed-bromeliad-spider.jpg =
+nature/rocky-mountain-parnassian.jpg =
+nature/sunlight-through-the-bee-wing.jpg =
+nature/tityus-scorpion.jpg =
+
+# ---------- nature / rocks-and-minerals
+nature/yellow-crystal-macro.jpg =
+
+# ---------- misc / hot-air-balloons
+misc/blue-balloon.jpg =
+misc/colorful-balloons.jpg =
+misc/rainbow-balloon.jpg =
+misc/two-balloons.jpg =

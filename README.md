@@ -9,7 +9,9 @@
   `src/assets/photos/astro/`, `nature/` or `misc/`. Use lowercase names like `orion-nebula.jpg`.
 - Astro makes the thumbnails and page-sized images itself.
 - Every photo shows in **All Photos** (the home page). Give it a line in `src/data/photos.ts`:
-  `subject`, `date`, the Google Drive `full` link, `collection` and, for animals, `species`.
+  `subject`, the Google Drive `full` link, `collection` and, for animals, `species`.
+- **Dates:** type each photo's month and year in `src/data/dates.txt` (e.g. `astro/orion-nebula.jpg = November 2024`).
+  Photos are sorted newest first. Typos show up as warnings in the build log.
 - **Collections** (Galaxies, Birds, ...) are listed near the top of `src/data/photos.ts`. To pick a
   collection's thumbnail set its `cover`, e.g. `cover: 'nature/great-blue-heron-in-flight.jpg'`.
   Blank means the newest photo in the collection.

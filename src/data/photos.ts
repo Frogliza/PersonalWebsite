@@ -1,6 +1,7 @@
 import type { ImageMetadata } from 'astro';
 import { species } from './species';
 import { objects } from './objects';
+import datesText from './dates.txt?raw';
 
 export type Category = 'astro' | 'nature' | 'misc';
 
@@ -38,99 +39,109 @@ export const collections: { category: Category; key: string; label: string; cove
      object:     key from objects.ts, for galaxies and nebulae (adds a catalog name like M101).
                  Photos with the same object are grouped the same way.
      lead:       true on the photo that should represent its species (default: the newest)
-     date:       when it was taken, e.g. 'March 2026', 'March 14, 2026' or '2026-03-14'.
+     date:       optional. Dates normally go in dates.txt; a date written here takes priority.
                  Photos are shown newest first; photos without a readable date come last.
      full:       public Google Drive link for the "Full resolution" button
    The photo page shows the name, scientific name and date only, without labels. */
 type Details = { subject?: string; collection?: string; species?: string; object?: string; lead?: boolean; date?: string; full?: string };
 const details: Record<string, Details> = {
   // ---------- astro
-  'astro/2024-solar-eclipse.jpg': { subject: '2024 Solar Eclipse', collection: 'more', date: '', full: '' },
-  'astro/aurora-pillars.jpg': { subject: 'Aurora Pillars', collection: 'more', date: '', full: '' },
-  'astro/aurora-pine.jpg': { subject: 'Aurora Pine', collection: 'more', date: '', full: '' },
-  'astro/coathanger-asterism.jpg': { subject: 'Coathanger Asterism', collection: 'more', date: '', full: '' },
-  'astro/crescent-nebula.jpg': { subject: 'Crescent Nebula', collection: 'nebulae', object: 'crescent-nebula', date: '', full: '' },
-  'astro/elephant-trunk-nebula.jpg': { subject: 'Elephant Trunk Nebula', collection: 'nebulae', object: 'elephant-trunk-nebula', date: '', full: '' },
-  'astro/gecko-nebula.jpg': { subject: 'Gecko Nebula', collection: 'nebulae', date: '', full: '' },
-  'astro/milkyway-over-elbert.jpg': { subject: 'Milkyway Over Elbert', collection: 'more', date: '', full: '' },
-  'astro/nebulae-of-cygnus.jpg': { subject: 'Nebulae Of Cygnus', collection: 'nebulae', date: '', full: '' },
-  'astro/nebulae-of-monoceros.jpg': { subject: 'Nebulae Of Monoceros', collection: 'nebulae', date: '', full: '' },
-  'astro/north-america-and-pelican-nebulae.jpg': { subject: 'North America And Pelican Nebulae', collection: 'nebulae', object: 'north-america-and-pelican-nebulae', date: '', full: '' },
-  'astro/orion-nebula.jpg': { subject: 'Orion Nebula', collection: 'nebulae', object: 'orion-nebula', date: 'November 2024', full: 'https://drive.google.com/file/d/1HXRJZqom2ueJr-fdzx898qJWd0JgYULw/view?usp=sharing' },
-  'astro/pinwheel-galaxy.jpg': { subject: 'Pinwheel Galaxy', collection: 'galaxies', object: 'pinwheel-galaxy', date: '', full: '' },
-  'astro/snr-g653-57.jpg': { subject: 'SNR G65.3+5.7', collection: 'nebulae', date: '', full: '' },
-  'astro/veil-nebula.jpg': { subject: 'Veil Nebula', collection: 'nebulae', date: '', full: '' },
-  'astro/whirlpool-galaxy.jpg': { subject: 'Whirlpool Galaxy', collection: 'galaxies', object: 'whirlpool-galaxy', date: '', full: '' },
+  'astro/2024-solar-eclipse.jpg': { subject: '2024 Solar Eclipse', collection: 'more', full: '' },
+  'astro/aurora-pillars.jpg': { subject: 'Aurora Pillars', collection: 'more', full: '' },
+  'astro/aurora-pine.jpg': { subject: 'Aurora Pine', collection: 'more', full: '' },
+  'astro/coathanger-asterism.jpg': { subject: 'Coathanger Asterism', collection: 'more', full: '' },
+  'astro/crescent-nebula.jpg': { subject: 'Crescent Nebula', collection: 'nebulae', object: 'crescent-nebula', full: '' },
+  'astro/elephant-trunk-nebula.jpg': { subject: 'Elephant Trunk Nebula', collection: 'nebulae', object: 'elephant-trunk-nebula', full: '' },
+  'astro/gecko-nebula.jpg': { subject: 'Gecko Nebula', collection: 'nebulae', full: '' },
+  'astro/milkyway-over-elbert.jpg': { subject: 'Milkyway Over Elbert', collection: 'more', full: '' },
+  'astro/nebulae-of-cygnus.jpg': { subject: 'Nebulae Of Cygnus', collection: 'nebulae', full: '' },
+  'astro/nebulae-of-monoceros.jpg': { subject: 'Nebulae Of Monoceros', collection: 'nebulae', full: '' },
+  'astro/north-america-and-pelican-nebulae.jpg': { subject: 'North America And Pelican Nebulae', collection: 'nebulae', object: 'north-america-and-pelican-nebulae', full: '' },
+  'astro/orion-nebula.jpg': { subject: 'Orion Nebula', collection: 'nebulae', object: 'orion-nebula', full: 'https://drive.google.com/file/d/1HXRJZqom2ueJr-fdzx898qJWd0JgYULw/view?usp=sharing' },
+  'astro/pinwheel-galaxy.jpg': { subject: 'Pinwheel Galaxy', collection: 'galaxies', object: 'pinwheel-galaxy', full: '' },
+  'astro/snr-g653-57.jpg': { subject: 'SNR G65.3+5.7', collection: 'nebulae', full: '' },
+  'astro/veil-nebula.jpg': { subject: 'Veil Nebula', collection: 'nebulae', full: '' },
+  'astro/whirlpool-galaxy.jpg': { subject: 'Whirlpool Galaxy', collection: 'galaxies', object: 'whirlpool-galaxy', full: '' },
 
   // ---------- nature
-  'nature/alligator-environment.jpg': { subject: 'Alligator Environment', collection: 'reptiles-and-amphibians', species: 'alligator', date: '', full: '' },
-  'nature/alligator-mother.jpg': { subject: 'Alligator Mother', collection: 'reptiles-and-amphibians', species: 'alligator', date: '', full: '' },
-  'nature/anhinga.jpg': { subject: 'Anhinga', collection: 'birds', species: 'anhinga', date: '', full: '' },
-  'nature/bananaquit.jpg': { subject: 'Bananaquit', collection: 'birds', species: 'bananaquit', date: '', full: '' },
-  'nature/big-horn-sheep.jpg': { subject: 'Big Horn Sheep', collection: 'mammals', species: 'big-horn-sheep', date: '', full: '' },
-  'nature/black-bellied-whistling-ducks-in-flight.jpg': { subject: 'Black Bellied Whistling Ducks In Flight', collection: 'birds', species: 'black-bellied-whistling-duck', date: '', full: '' },
-  'nature/black-spiny-tailed-iguana-portrait.jpg': { subject: 'Black Spiny Tailed Iguana Portrait', collection: 'reptiles-and-amphibians', species: 'black-spiny-tailed-iguana', date: '', full: '' },
-  'nature/blue-morpho-wing.jpg': { subject: 'Blue Morpho Wing', collection: 'arthropods', date: '', full: '' },
-  'nature/central-american-spider-monkey-mother.jpg': { subject: 'Central American Spider Monkey Mother', collection: 'mammals', species: 'central-american-spider-monkey', date: '', full: '' },
-  'nature/central-american-squirrel-monkey.jpg': { subject: 'Central American Squirrel Monkey', collection: 'mammals', species: 'central-american-squirrel-monkey', date: '', full: '' },
-  'nature/central-american-white-faced-capuchin.jpg': { subject: 'Central American White Faced Capuchin', collection: 'mammals', species: 'central-american-white-faced-capuchin', date: '', full: '' },
-  'nature/central-american-white-faced-capuchin-looking.jpg': { subject: 'Central American White Faced Capuchin Looking', collection: 'mammals', species: 'central-american-white-faced-capuchin', date: '', full: '' },  // CHECK: filename was cut off in a screenshot
-  'nature/central-american-white-faced-capuchin-portrait.jpg': { subject: 'Central American White Faced Capuchin Portrait', collection: 'mammals', species: 'central-american-white-faced-capuchin', date: '', full: '' },  // CHECK: filename was cut off in a screenshot
-  'nature/chachalaca-in-a-tree.jpg': { subject: 'Chachalaca In A Tree', collection: 'birds', date: '', full: '' },
-  'nature/charming-hummingbird.jpg': { subject: 'Charming Hummingbird', collection: 'birds', species: 'charming-hummingbird', date: '', full: '' },
-  'nature/common-black-hawk.jpg': { subject: 'Common Black Hawk', collection: 'birds', species: 'common-black-hawk', date: '', full: '' },
-  'nature/common-black-hawk-in-flight.jpg': { subject: 'Common Black Hawk In Flight', collection: 'birds', species: 'common-black-hawk', date: '', full: '' },
-  'nature/common-blunt-headed-tree-snake-close.jpg': { subject: 'Common Blunt Headed Tree Snake Close', collection: 'reptiles-and-amphibians', species: 'common-blunt-headed-tree-snake', date: '', full: '' },
-  'nature/common-blunt-headed-tree-snake-periscope.jpg': { subject: 'Common Blunt Headed Tree Snake Periscope', collection: 'reptiles-and-amphibians', species: 'common-blunt-headed-tree-snake', date: '', full: '' },  // CHECK: filename was cut off in a screenshot
-  'nature/common-blunt-headed-tree-snake-portrait.jpg': { subject: 'Common Blunt Headed Tree Snake Portrait', collection: 'reptiles-and-amphibians', species: 'common-blunt-headed-tree-snake', date: '', full: '' },  // CHECK: filename was cut off in a screenshot
-  'nature/common-loon.jpg': { subject: 'Common Loon', collection: 'birds', species: 'common-loon', date: '', full: '' },
-  'nature/crested-guan.jpg': { subject: 'Crested Guan', collection: 'birds', species: 'crested-guan', date: '', full: '' },
-  'nature/eastern-garter-portrait.jpg': { subject: 'Eastern Garter Portrait', collection: 'reptiles-and-amphibians', species: 'eastern-garter', date: '', full: '' },
-  'nature/fly-catcher.jpg': { subject: 'Fly Catcher', collection: 'birds', date: '', full: '' },
-  'nature/fly-on-yellow-flower.jpg': { subject: 'Fly On Yellow Flower', collection: 'arthropods', date: '', full: '' },
-  'nature/gopher-tortoise.jpg': { subject: 'Gopher Tortoise', collection: 'reptiles-and-amphibians', species: 'gopher-tortoise', date: '', full: '' },
-  'nature/granular-poison-frog.jpg': { subject: 'Granular Poison Frog', collection: 'reptiles-and-amphibians', species: 'granular-poison-frog', date: '', full: '' },
-  'nature/great-blue-heron-environment.jpg': { subject: 'Great Blue Heron Environment', collection: 'birds', species: 'great-blue-heron', date: '', full: '' },
-  'nature/great-blue-heron-in-flight.jpg': { subject: 'Great Blue Heron In Flight', collection: 'birds', species: 'great-blue-heron', date: '', full: '' },
-  'nature/green-sweat-bee.jpg': { subject: 'Green Sweat Bee', collection: 'arthropods', date: '', full: '' },
-  'nature/howler-monkey.jpg': { subject: 'Howler Monkey', collection: 'mammals', date: '', full: '' },
-  'nature/humpback-whale-with-calf.jpg': { subject: 'Humpback Whale With Calf', collection: 'mammals', species: 'humpback-whale', date: '', full: '' },
-  'nature/katydid-munching-leaf.jpg': { subject: 'Katydid Munching Leaf', collection: 'arthropods', date: '', full: '' },
-  'nature/leaf-cutter-ant-focus.jpg': { subject: 'Leaf Cutter Ant Focus', collection: 'arthropods', species: 'leaf-cutter-ant', date: '', full: '' },
-  'nature/leaf-cutter-ant-march.jpg': { subject: 'Leaf Cutter Ant March', collection: 'arthropods', species: 'leaf-cutter-ant', date: '', full: '' },
-  'nature/leaf-cutter-ant-standoff.jpg': { subject: 'Leaf Cutter Ant Standoff', collection: 'arthropods', species: 'leaf-cutter-ant', date: '', full: '' },
-  'nature/northern-tamandua.jpg': { subject: 'Northern Tamandua', collection: 'mammals', species: 'northern-tamandua', date: '', full: '' },
-  'nature/orange-butterfly.jpg': { subject: 'Orange Butterfly', collection: 'arthropods', date: '', full: '' },
-  'nature/ornate-cat-eyed-snake.jpg': { subject: 'Ornate Cat Eyed Snake', collection: 'reptiles-and-amphibians', species: 'ornate-cat-eyed-snake', date: '', full: '' },
-  'nature/ornate-cat-eyed-snake-portrait.jpg': { subject: 'Ornate Cat Eyed Snake Portrait', collection: 'reptiles-and-amphibians', species: 'ornate-cat-eyed-snake', date: '', full: '' },
-  'nature/prairie-lizard.jpg': { subject: 'Prairie Lizard', collection: 'reptiles-and-amphibians', species: 'prairie-lizard', date: '', full: '' },
-  'nature/rainforest-toad.jpg': { subject: 'Rainforest Toad', collection: 'reptiles-and-amphibians', date: '', full: '' },
-  'nature/red-thighed-bromeliad-spider.jpg': { subject: 'Red Thighed Bromeliad Spider', collection: 'arthropods', date: '', full: '' },
-  'nature/reddish-egret.jpg': { subject: 'Reddish Egret', collection: 'birds', species: 'reddish-egret', date: '', full: '' },
-  'nature/road-hawk.jpg': { subject: 'Road Hawk', collection: 'birds', species: 'road-hawk', date: '', full: '' },
-  'nature/rocky-mountain-parnassian.jpg': { subject: 'Rocky Mountain Parnassian', collection: 'arthropods', species: 'rocky-mountain-parnassian', date: '', full: '' },
-  'nature/scarlet-rumped-tanager.jpg': { subject: 'Scarlet Rumped Tanager', collection: 'birds', species: 'scarlet-rumped-tanager', date: '', full: '' },
-  'nature/slaty-tailed-trogan.jpg': { subject: 'Slaty Tailed Trogan', collection: 'birds', species: 'slaty-tailed-trogan', date: '', full: '' },
-  'nature/squirrel.jpg': { subject: 'Squirrel', collection: 'mammals', date: '', full: '' },
-  'nature/summer-tanager.jpg': { subject: 'Summer Tanager', collection: 'birds', species: 'summer-tanager', date: '', full: '' },
-  'nature/sunlight-through-the-bee-wing.jpg': { subject: 'Sunlight Through The Bee Wing', collection: 'arthropods', date: '', full: '' },
-  'nature/terciopelo-baby.jpg': { subject: 'Terciopelo Baby', collection: 'reptiles-and-amphibians', species: 'terciopelo', date: '', full: '' },
-  'nature/terciopelo-through-the-grass.jpg': { subject: 'Terciopelo Through The Grass', collection: 'reptiles-and-amphibians', species: 'terciopelo', date: '', full: '' },
-  'nature/thick-billed-euphonia.jpg': { subject: 'Thick Billed Euphonia', collection: 'birds', species: 'thick-billed-euphonia', date: '', full: '' },
-  'nature/tityus-scorpion.jpg': { subject: 'Tityus Scorpion', collection: 'arthropods', date: '', full: '' },
-  'nature/tropical-flat-snake-gaze.jpg': { subject: 'Tropical Flat Snake Gaze', collection: 'reptiles-and-amphibians', species: 'tropical-flat-snake', date: '', full: '' },
-  'nature/tropical-flat-snake-portrait.jpg': { subject: 'Tropical Flat Snake Portrait', collection: 'reptiles-and-amphibians', species: 'tropical-flat-snake', date: '', full: '' },
-  'nature/tropical-flat-snake-wide-portrait.jpg': { subject: 'Tropical Flat Snake Wide Portrait', collection: 'reptiles-and-amphibians', species: 'tropical-flat-snake', date: '', full: '' },
-  'nature/turkey-vulture.jpg': { subject: 'Turkey Vulture', collection: 'birds', species: 'turkey-vulture', date: '', full: '' },
-  'nature/yellow-crystal-macro.jpg': { subject: 'Yellow Crystal Macro', collection: 'rocks-and-minerals', date: '', full: '' },
-  'nature/yellow-throated-toucan.jpg': { subject: 'Yellow Throated Toucan', collection: 'birds', species: 'yellow-throated-toucan', date: '', full: '' },
+  'nature/alligator-environment.jpg': { subject: 'Alligator Environment', collection: 'reptiles-and-amphibians', species: 'alligator', full: '' },
+  'nature/alligator-mother.jpg': { subject: 'Alligator Mother', collection: 'reptiles-and-amphibians', species: 'alligator', full: '' },
+  'nature/anhinga.jpg': { subject: 'Anhinga', collection: 'birds', species: 'anhinga', full: '' },
+  'nature/bananaquit.jpg': { subject: 'Bananaquit', collection: 'birds', species: 'bananaquit', full: '' },
+  'nature/big-horn-sheep.jpg': { subject: 'Big Horn Sheep', collection: 'mammals', species: 'big-horn-sheep', full: '' },
+  'nature/black-bellied-whistling-ducks-in-flight.jpg': { subject: 'Black Bellied Whistling Ducks In Flight', collection: 'birds', species: 'black-bellied-whistling-duck', full: '' },
+  'nature/black-spiny-tailed-iguana-portrait.jpg': { subject: 'Black Spiny Tailed Iguana Portrait', collection: 'reptiles-and-amphibians', species: 'black-spiny-tailed-iguana', full: '' },
+  'nature/blue-morpho-wing.jpg': { subject: 'Blue Morpho Wing', collection: 'arthropods', full: '' },
+  'nature/central-american-spider-monkey-mother.jpg': { subject: 'Central American Spider Monkey Mother', collection: 'mammals', species: 'central-american-spider-monkey', full: '' },
+  'nature/central-american-squirrel-monkey.jpg': { subject: 'Central American Squirrel Monkey', collection: 'mammals', species: 'central-american-squirrel-monkey', full: '' },
+  'nature/central-american-white-faced-capuchin.jpg': { subject: 'Central American White Faced Capuchin', collection: 'mammals', species: 'central-american-white-faced-capuchin', full: '' },
+  'nature/central-american-white-faced-capuchin-looking.jpg': { subject: 'Central American White Faced Capuchin Looking', collection: 'mammals', species: 'central-american-white-faced-capuchin', full: '' },  // CHECK: filename was cut off in a screenshot
+  'nature/central-american-white-faced-capuchin-portrait.jpg': { subject: 'Central American White Faced Capuchin Portrait', collection: 'mammals', species: 'central-american-white-faced-capuchin', full: '' },  // CHECK: filename was cut off in a screenshot
+  'nature/chachalaca-in-a-tree.jpg': { subject: 'Chachalaca In A Tree', collection: 'birds', full: '' },
+  'nature/charming-hummingbird.jpg': { subject: 'Charming Hummingbird', collection: 'birds', species: 'charming-hummingbird', full: '' },
+  'nature/common-black-hawk.jpg': { subject: 'Common Black Hawk', collection: 'birds', species: 'common-black-hawk', full: '' },
+  'nature/common-black-hawk-in-flight.jpg': { subject: 'Common Black Hawk In Flight', collection: 'birds', species: 'common-black-hawk', full: '' },
+  'nature/common-blunt-headed-tree-snake-close.jpg': { subject: 'Common Blunt Headed Tree Snake Close', collection: 'reptiles-and-amphibians', species: 'common-blunt-headed-tree-snake', full: '' },
+  'nature/common-blunt-headed-tree-snake-periscope.jpg': { subject: 'Common Blunt Headed Tree Snake Periscope', collection: 'reptiles-and-amphibians', species: 'common-blunt-headed-tree-snake', full: '' },  // CHECK: filename was cut off in a screenshot
+  'nature/common-blunt-headed-tree-snake-portrait.jpg': { subject: 'Common Blunt Headed Tree Snake Portrait', collection: 'reptiles-and-amphibians', species: 'common-blunt-headed-tree-snake', full: '' },  // CHECK: filename was cut off in a screenshot
+  'nature/common-loon.jpg': { subject: 'Common Loon', collection: 'birds', species: 'common-loon', full: '' },
+  'nature/crested-guan.jpg': { subject: 'Crested Guan', collection: 'birds', species: 'crested-guan', full: '' },
+  'nature/eastern-garter-portrait.jpg': { subject: 'Eastern Garter Portrait', collection: 'reptiles-and-amphibians', species: 'eastern-garter', full: '' },
+  'nature/fly-catcher.jpg': { subject: 'Fly Catcher', collection: 'birds', full: '' },
+  'nature/fly-on-yellow-flower.jpg': { subject: 'Fly On Yellow Flower', collection: 'arthropods', full: '' },
+  'nature/gopher-tortoise.jpg': { subject: 'Gopher Tortoise', collection: 'reptiles-and-amphibians', species: 'gopher-tortoise', full: '' },
+  'nature/granular-poison-frog.jpg': { subject: 'Granular Poison Frog', collection: 'reptiles-and-amphibians', species: 'granular-poison-frog', full: '' },
+  'nature/great-blue-heron-environment.jpg': { subject: 'Great Blue Heron Environment', collection: 'birds', species: 'great-blue-heron', full: '' },
+  'nature/great-blue-heron-in-flight.jpg': { subject: 'Great Blue Heron In Flight', collection: 'birds', species: 'great-blue-heron', full: '' },
+  'nature/green-sweat-bee.jpg': { subject: 'Green Sweat Bee', collection: 'arthropods', full: '' },
+  'nature/howler-monkey.jpg': { subject: 'Howler Monkey', collection: 'mammals', full: '' },
+  'nature/humpback-whale-with-calf.jpg': { subject: 'Humpback Whale With Calf', collection: 'mammals', species: 'humpback-whale', full: '' },
+  'nature/katydid-munching-leaf.jpg': { subject: 'Katydid Munching Leaf', collection: 'arthropods', full: '' },
+  'nature/leaf-cutter-ant-focus.jpg': { subject: 'Leaf Cutter Ant Focus', collection: 'arthropods', species: 'leaf-cutter-ant', full: '' },
+  'nature/leaf-cutter-ant-march.jpg': { subject: 'Leaf Cutter Ant March', collection: 'arthropods', species: 'leaf-cutter-ant', full: '' },
+  'nature/leaf-cutter-ant-standoff.jpg': { subject: 'Leaf Cutter Ant Standoff', collection: 'arthropods', species: 'leaf-cutter-ant', full: '' },
+  'nature/northern-tamandua.jpg': { subject: 'Northern Tamandua', collection: 'mammals', species: 'northern-tamandua', full: '' },
+  'nature/orange-butterfly.jpg': { subject: 'Orange Butterfly', collection: 'arthropods', full: '' },
+  'nature/ornate-cat-eyed-snake.jpg': { subject: 'Ornate Cat Eyed Snake', collection: 'reptiles-and-amphibians', species: 'ornate-cat-eyed-snake', full: '' },
+  'nature/ornate-cat-eyed-snake-portrait.jpg': { subject: 'Ornate Cat Eyed Snake Portrait', collection: 'reptiles-and-amphibians', species: 'ornate-cat-eyed-snake', full: '' },
+  'nature/prairie-lizard.jpg': { subject: 'Prairie Lizard', collection: 'reptiles-and-amphibians', species: 'prairie-lizard', full: '' },
+  'nature/rainforest-toad.jpg': { subject: 'Rainforest Toad', collection: 'reptiles-and-amphibians', full: '' },
+  'nature/red-thighed-bromeliad-spider.jpg': { subject: 'Red Thighed Bromeliad Spider', collection: 'arthropods', full: '' },
+  'nature/reddish-egret.jpg': { subject: 'Reddish Egret', collection: 'birds', species: 'reddish-egret', full: '' },
+  'nature/road-hawk.jpg': { subject: 'Road Hawk', collection: 'birds', species: 'road-hawk', full: '' },
+  'nature/rocky-mountain-parnassian.jpg': { subject: 'Rocky Mountain Parnassian', collection: 'arthropods', species: 'rocky-mountain-parnassian', full: '' },
+  'nature/scarlet-rumped-tanager.jpg': { subject: 'Scarlet Rumped Tanager', collection: 'birds', species: 'scarlet-rumped-tanager', full: '' },
+  'nature/slaty-tailed-trogan.jpg': { subject: 'Slaty Tailed Trogan', collection: 'birds', species: 'slaty-tailed-trogan', full: '' },
+  'nature/squirrel.jpg': { subject: 'Squirrel', collection: 'mammals', full: '' },
+  'nature/summer-tanager.jpg': { subject: 'Summer Tanager', collection: 'birds', species: 'summer-tanager', full: '' },
+  'nature/sunlight-through-the-bee-wing.jpg': { subject: 'Sunlight Through The Bee Wing', collection: 'arthropods', full: '' },
+  'nature/terciopelo-baby.jpg': { subject: 'Terciopelo Baby', collection: 'reptiles-and-amphibians', species: 'terciopelo', full: '' },
+  'nature/terciopelo-through-the-grass.jpg': { subject: 'Terciopelo Through The Grass', collection: 'reptiles-and-amphibians', species: 'terciopelo', full: '' },
+  'nature/thick-billed-euphonia.jpg': { subject: 'Thick Billed Euphonia', collection: 'birds', species: 'thick-billed-euphonia', full: '' },
+  'nature/tityus-scorpion.jpg': { subject: 'Tityus Scorpion', collection: 'arthropods', full: '' },
+  'nature/tropical-flat-snake-gaze.jpg': { subject: 'Tropical Flat Snake Gaze', collection: 'reptiles-and-amphibians', species: 'tropical-flat-snake', full: '' },
+  'nature/tropical-flat-snake-portrait.jpg': { subject: 'Tropical Flat Snake Portrait', collection: 'reptiles-and-amphibians', species: 'tropical-flat-snake', full: '' },
+  'nature/tropical-flat-snake-wide-portrait.jpg': { subject: 'Tropical Flat Snake Wide Portrait', collection: 'reptiles-and-amphibians', species: 'tropical-flat-snake', full: '' },
+  'nature/turkey-vulture.jpg': { subject: 'Turkey Vulture', collection: 'birds', species: 'turkey-vulture', full: '' },
+  'nature/yellow-crystal-macro.jpg': { subject: 'Yellow Crystal Macro', collection: 'rocks-and-minerals', full: '' },
+  'nature/yellow-throated-toucan.jpg': { subject: 'Yellow Throated Toucan', collection: 'birds', species: 'yellow-throated-toucan', full: '' },
 
   // ---------- misc
-  'misc/blue-balloon.jpg': { subject: 'Blue Balloon', collection: 'hot-air-balloons', date: '', full: '' },
-  'misc/colorful-balloons.jpg': { subject: 'Colorful Balloons', collection: 'hot-air-balloons', date: '', full: '' },
-  'misc/rainbow-balloon.jpg': { subject: 'Rainbow Balloon', collection: 'hot-air-balloons', date: '', full: '' },
-  'misc/two-balloons.jpg': { subject: 'Two Balloons', collection: 'hot-air-balloons', date: '', full: '' },
+  'misc/blue-balloon.jpg': { subject: 'Blue Balloon', collection: 'hot-air-balloons', full: '' },
+  'misc/colorful-balloons.jpg': { subject: 'Colorful Balloons', collection: 'hot-air-balloons', full: '' },
+  'misc/rainbow-balloon.jpg': { subject: 'Rainbow Balloon', collection: 'hot-air-balloons', full: '' },
+  'misc/two-balloons.jpg': { subject: 'Two Balloons', collection: 'hot-air-balloons', full: '' },
 };
+
+/* DATES from dates.txt: one "folder/filename = Month Year" per line. */
+const dates: Record<string, string> = {};
+for (const line of datesText.split(/\r?\n/)) {
+  const t = line.trim();
+  const i = t.indexOf('=');
+  if (!t || t.startsWith('#') || i < 0) continue;
+  const date = t.slice(i + 1).trim();
+  if (date) dates[t.slice(0, i).trim()] = date;
+}
 
 /* Every image in src/assets/photos/<category>/ becomes a photo automatically. */
 const modules = import.meta.glob<{ default: ImageMetadata }>(
@@ -152,10 +163,16 @@ export const photos: Photo[] = Object.entries(modules)
     const category = file.split('/')[0] as Category;
     const name = file.split('/')[1].replace(/\.[^.]+$/, '');
     const d = details[file] ?? {};
-    return { ...d, slug: `${category}-${name}`, category, file, img: mod.default, subject: d.subject ?? name.replace(/[-_]+/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase()) };
+    return { ...d, date: d.date || dates[file], slug: `${category}-${name}`, category, file, img: mod.default, subject: d.subject ?? name.replace(/[-_]+/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase()) };
   })
   .filter((p) => ['astro', 'nature', 'misc'].includes(p.category))
   .sort((a, b) => time(b) - time(a) || a.file.localeCompare(b.file));
+
+/* Warn (in the build log) about typos in dates.txt. */
+for (const [file, date] of Object.entries(dates)) {
+  if (!photos.some((p) => p.file === file)) console.warn(`[dates.txt] No photo named "${file}"`);
+  else if (Number.isNaN(Date.parse(date))) console.warn(`[dates.txt] Can't read the date "${date}" for ${file}. Use a format like "March 2026".`);
+}
 
 /* ITEMS: what the galleries show. Photos of the same species become one item. */
 export type Item = {
@@ -173,7 +190,7 @@ export const items: Item[] = [...groups.values()].map((list) => {
   const lead = list.find((p) => p.lead) ?? list[0];
   const sp = lead.species ? species[lead.species] : undefined;
   const ob = lead.object ? objects[lead.object] : undefined;
-  const dates = [...new Set(list.map((p) => p.date).filter(Boolean))] as string[];
+  const shown = [...new Set(list.map((p) => p.date).filter(Boolean))] as string[];
   return {
     slug: lead.species ?? lead.object ?? lead.slug,
     category: lead.category,
@@ -181,7 +198,7 @@ export const items: Item[] = [...groups.values()].map((list) => {
     name: list.length > 1 ? (sp?.name ?? ob?.name ?? lead.subject) : lead.subject,
     scientific: sp?.scientific || undefined,
     catalog: ob?.catalog || undefined,
-    date: dates.length === 1 ? dates[0] : undefined,
+    date: shown.length === 1 ? shown[0] : undefined,
     photos: [lead, ...list.filter((p) => p !== lead)],
     lead,
   };
