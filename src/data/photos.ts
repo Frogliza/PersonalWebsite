@@ -20,15 +20,15 @@ export const url = (path: string) => import.meta.env.BASE_URL.replace(/\/$/, '')
    cover: the photo used as the collection's thumbnail, written as 'category/filename',
           e.g. cover: 'nature/great-blue-heron-in-flight.jpg'. Leave '' to use the newest photo. */
 export const collections: { category: Category; key: string; label: string; cover?: string }[] = [
-  { category: 'astro', key: 'galaxies', label: 'Galaxies', cover: '' },
-  { category: 'astro', key: 'nebulae', label: 'Nebulae', cover: '' },
-  { category: 'astro', key: 'more', label: 'More', cover: '' },
-  { category: 'nature', key: 'birds', label: 'Birds', cover: '' },
-  { category: 'nature', key: 'mammals', label: 'Mammals', cover: '' },
-  { category: 'nature', key: 'reptiles-and-amphibians', label: 'Reptiles & Amphibians', cover: '' },
-  { category: 'nature', key: 'arthropods', label: 'Arthropods', cover: '' },
-  { category: 'nature', key: 'rocks-and-minerals', label: 'Rocks & Minerals', cover: '' },
-  { category: 'misc', key: 'hot-air-balloons', label: 'Hot Air Balloons', cover: '' },
+  { category: 'astro', key: 'galaxies', label: 'Galaxies', cover: 'whirlpool-galaxy' },
+  { category: 'astro', key: 'nebulae', label: 'Nebulae', cover: 'north-america-and-pelican-nebulae' },
+  { category: 'astro', key: 'more', label: 'More', cover: 'milkyway-over-elbert' },
+  { category: 'nature', key: 'birds', label: 'Birds', cover: 'charming-hummingbird' },
+  { category: 'nature', key: 'mammals', label: 'Mammals', cover: 'central-american-white-faced-capuchin-portrait' },
+  { category: 'nature', key: 'reptiles-and-amphibians', label: 'Reptiles & Amphibians', cover: 'tropical-flat-snake-wide-portrait' },
+  { category: 'nature', key: 'arthropods', label: 'Arthropods', cover: 'green-sweat-bee' },
+  { category: 'nature', key: 'rocks-and-minerals', label: 'Rocks & Minerals', cover: 'yellow-crystal-macro' },
+  { category: 'misc', key: 'hot-air-balloons', label: 'Hot Air Balloons', cover: 'colorful-balloons' },
 ];
 
 /* DETAILS for each photo, keyed by 'category/filename'. Every field is optional.
