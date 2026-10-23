@@ -82,8 +82,8 @@ const details: Record<string, Details> = {
   'nature/common-black-hawk.jpg': { subject: 'Common Black Hawk', collection: 'birds', species: 'common-black-hawk', lead: true, full: '' },
   'nature/common-black-hawk-in-flight.jpg': { subject: 'Common Black Hawk In Flight', collection: 'birds', species: 'common-black-hawk', full: '' },
   'nature/common-blunt-headed-tree-snake-close.jpg': { subject: 'Common Blunt Headed Tree Snake Close', collection: 'reptiles-and-amphibians', species: 'common-blunt-headed-tree-snake', full: '' },
-  'nature/common-blunt-headed-tree-snake-periscope.jpg': { subject: 'Common Blunt Headed Tree Snake Periscope', collection: 'reptiles-and-amphibians', species: 'common-blunt-headed-tree-snake', lead: true, full: '' },  // CHECK: filename was cut off in a screenshot
-  'nature/common-blunt-headed-tree-snake-portrait.jpg': { subject: 'Common Blunt Headed Tree Snake Portrait', collection: 'reptiles-and-amphibians', species: 'common-blunt-headed-tree-snake', full: '' },  // CHECK: filename was cut off in a screenshot
+  'nature/common-blunt-headed-tree-snake-periscope.jpg': { subject: 'Common Blunt Headed Tree Snake Periscope', collection: 'reptiles-and-amphibians', species: 'common-blunt-headed-tree-snake', full: '' },  // CHECK: filename was cut off in a screenshot
+  'nature/common-blunt-headed-tree-snake-portrait.jpg': { subject: 'Common Blunt Headed Tree Snake Portrait', collection: 'reptiles-and-amphibians', species: 'common-blunt-headed-tree-snake', lead: true, full: '' },  // CHECK: filename was cut off in a screenshot
   'nature/common-loon.jpg': { subject: 'Common Loon', collection: 'birds', species: 'common-loon', full: '' },
   'nature/crested-guan.jpg': { subject: 'Crested Guan', collection: 'birds', species: 'crested-guan', full: '' },
   'nature/eastern-garter-portrait.jpg': { subject: 'Eastern Garter Snake', collection: 'reptiles-and-amphibians', species: 'eastern-garter', full: '' },
