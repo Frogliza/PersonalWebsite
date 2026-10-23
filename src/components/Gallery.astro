@@ -2,17 +2,16 @@
 import { Image } from 'astro:assets';
 import { url } from '../data/photos';
 
-const { items, from = false } = Astro.props;
+const { items, from = false, perRow = 4 } = Astro.props;
 
-/* Four photos per row on desktop. */
-const perRow = 4;
+/* Photos per row on desktop (All Photos: 5, collections: 3). */
 const rows = [];
 for (let i = 0; i < items.length; i += perRow) rows.push(items.slice(i, i + perRow));
 ---
 {items.length === 0 ? (
   <p class="empty">No photos here yet.</p>
 ) : (
-  <div class="grid">
+  <div class="grid" style={`--n:${perRow}`}>
     {rows.map((row) => (
       <div class={row.length < perRow ? 'row last' : 'row'}>
         {row.map((it) => (
