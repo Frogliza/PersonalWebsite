@@ -44,4 +44,9 @@ export const species: Record<string, { name: string; scientific?: string }> = {
   'tityus-scorpion': { name: 'Scorpion (No Common Name)', scientific: 'Tityus dedoslargos' },
   'orange-butterfly': { name: 'Butterfly (No Common Name)', scientific: 'Heliconius ismenius ssp. clarescens' },
   'blue-morpho-wing': { name: 'Amathonte Morpho Wing', scientific: 'Morpho amathonte' },
+  'fly-catcher': { name: 'Eastern Wood-Pewee', scientific: 'Contopus virens' },
+  'howler-monkey': { name: 'Mantled Howler Monkey', scientific: 'Alouatta palliata' },
+  'yellow-crystal-macro': { name: 'Orange Crystals', scientific: 'Unknown' },
+  'squirrel': { name: 'Rock Squirrel', scientific: 'Otospermophilus variegatus' },
+  'green-sweat-bee': { name: 'Pure Green Sweat Bee', scientific: 'Augochlora pura' },
 };
