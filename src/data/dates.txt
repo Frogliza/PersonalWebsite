@@ -29,25 +29,25 @@ astro/coathanger-asterism.jpg = June 2024
 astro/milkyway-over-elbert.jpg = August 2024
 
 # ---------- nature / birds
-nature/anhinga.jpg =
+nature/anhinga.jpg = August 2023
 nature/bananaquit.jpg = November 2025
-nature/black-bellied-whistling-ducks-in-flight.jpg =
+nature/black-bellied-whistling-ducks-in-flight.jpg = August 2023
 nature/chachalaca-in-a-tree.jpg = November 2025
 nature/charming-hummingbird.jpg = November 2025
 nature/common-black-hawk-in-flight.jpg = November 2025
 nature/common-black-hawk.jpg = November 2025
-nature/common-loon.jpg =
+nature/common-loon.jpg = August 2023
 nature/crested-guan.jpg = November 2025
-nature/fly-catcher.jpg =
-nature/great-blue-heron-environment.jpg =
-nature/great-blue-heron-in-flight.jpg =
-nature/reddish-egret.jpg =
-nature/road-hawk.jpg =
+nature/fly-catcher.jpg = July 2023
+nature/great-blue-heron-environment.jpg = April 2026
+nature/great-blue-heron-in-flight.jpg = April 2026
+nature/reddish-egret.jpg = May 2024
+nature/road-hawk.jpg = November 2025
 nature/scarlet-rumped-tanager.jpg = November 2025
 nature/slaty-tailed-trogan.jpg = November 2025
 nature/summer-tanager.jpg = November 2025
 nature/thick-billed-euphonia.jpg = November 2025
-nature/turkey-vulture.jpg =
+nature/turkey-vulture.jpg = August 2023
 nature/yellow-throated-toucan.jpg = November 2025
 
 # ---------- nature / mammals
@@ -63,14 +63,14 @@ nature/northern-tamandua.jpg = November 2025
 nature/squirrel.jpg = September 2025
 
 # ---------- nature / reptiles-and-amphibians
-nature/alligator-environment.jpg =
-nature/alligator-mother.jpg =
-nature/black-spiny-tailed-iguana-portrait.jpg =
+nature/alligator-environment.jpg = August 2023
+nature/alligator-mother.jpg = May 2024
+nature/black-spiny-tailed-iguana-portrait.jpg = November 2025
 nature/common-blunt-headed-tree-snake-close.jpg = November 2025
 nature/common-blunt-headed-tree-snake-periscope.jpg = November 2025
 nature/common-blunt-headed-tree-snake-portrait.jpg = November 2025
-nature/eastern-garter-portrait.jpg =
-nature/gopher-tortoise.jpg =
+nature/eastern-garter-portrait.jpg = October 2025
+nature/gopher-tortoise.jpg = May 2024
 nature/granular-poison-frog.jpg = November 2025
 nature/ornate-cat-eyed-snake-portrait.jpg = November 2025
 nature/ornate-cat-eyed-snake.jpg = November 2025
@@ -84,9 +84,9 @@ nature/tropical-flat-snake-wide-portrait.jpg = November 2025
 
 # ---------- nature / arthropods
 nature/blue-morpho-wing.jpg = November 2025
-nature/fly-on-yellow-flower.jpg =
-nature/green-sweat-bee.jpg =
-nature/katydid-munching-leaf.jpg =
+nature/fly-on-yellow-flower.jpg = October 2025
+nature/green-sweat-bee.jpg = October 2025
+nature/katydid-munching-leaf.jpg = October 2025
 nature/leaf-cutter-ant-focus.jpg = November 2025
 nature/leaf-cutter-ant-march.jpg = November 2025
 nature/leaf-cutter-ant-standoff.jpg = November 2025
@@ -100,7 +100,7 @@ nature/tityus-scorpion.jpg = November 2025
 nature/yellow-crystal-macro.jpg = August 2026
 
 # ---------- misc / hot-air-balloons
-misc/blue-balloon.jpg =
-misc/colorful-balloons.jpg =
-misc/rainbow-balloon.jpg =
-misc/two-balloons.jpg =
+misc/blue-balloon.jpg = June 2023
+misc/colorful-balloons.jpg = June 2023
+misc/rainbow-balloon.jpg = June 2023
+misc/two-balloons.jpg = June 2023
