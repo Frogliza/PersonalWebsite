@@ -74,9 +74,9 @@ const details: Record<string, Details> = {
   'nature/blue-morpho-wing.jpg': { subject: 'Amathonte Morpho Wing', collection: 'arthropods', species: 'blue-morpho-wing', full: '' },
   'nature/central-american-spider-monkey-mother.jpg': { subject: 'Central American Spider Monkey Mother & Baby', collection: 'mammals', species: 'central-american-spider-monkey', full: '' },
   'nature/central-american-squirrel-monkey.jpg': { subject: 'Central American Squirrel Monkey', collection: 'mammals', species: 'central-american-squirrel-monkey', full: '' },
-  'nature/central-american-white-faced-capuchin.jpg': { subject: 'Central American White-faced Capuchin', collection: 'mammals', species: 'central-american-white-faced-capuchin', full: '' },
-  'nature/central-american-white-faced-capuchin-looking-up.jpg': { subject: 'Central American White Faced Capuchin Looking Up', collection: 'mammals', species: 'central-american-white-faced-capuchin', full: '' },  // CHECK: filename was cut off in a screenshot
-  'nature/central-american-white-faced-capuchin-portrait.jpg': { subject: 'Central American White Faced Capuchin Portrait', collection: 'mammals', species: 'central-american-white-faced-capuchin', full: '' },  // CHECK: filename was cut off in a screenshot
+  'nature/central-american-white-faced-capuchin.jpg': { subject: 'Central American White-faced Capuchin 3', collection: 'mammals', species: 'central-american-white-faced-capuchin', full: '' },
+  'nature/central-american-white-faced-capuchin-looking-up.jpg': { subject: 'Central American White Faced Capuchin 2', collection: 'mammals', species: 'central-american-white-faced-capuchin', full: '' },  // CHECK: filename was cut off in a screenshot
+  'nature/central-american-white-faced-capuchin-portrait.jpg': { subject: 'Central American White Faced Capuchin 1', collection: 'mammals', species: 'central-american-white-faced-capuchin', full: '' },  // CHECK: filename was cut off in a screenshot
   'nature/chachalaca-in-a-tree.jpg': { subject: 'Gray Chachalaca', collection: 'birds', species: 'chachalaca-in-a-tree', full: '' },
   'nature/charming-hummingbird.jpg': { subject: 'Charming Hummingbird', collection: 'birds', species: 'charming-hummingbird', full: '' },
   'nature/common-black-hawk.jpg': { subject: 'Common Black Hawk', collection: 'birds', species: 'common-black-hawk', full: '' },
