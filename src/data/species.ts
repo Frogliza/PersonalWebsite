@@ -38,4 +38,5 @@ export const species: Record<string, { name: string; scientific?: string }> = {
   'leaf-cutter-ant': { name: 'Leaf Cutter Ants', scientific: 'Atta' },
   'rocky-mountain-parnassian': { name: 'Rocky Mountain Parnassian', scientific: 'Parnassius smintheus' },
   'sunlight-through-the-bee-wing': { name: 'Eastern Carpenter Bee', scientific: 'Xylocopa virginica' },
+  'chachalaca-in-a-tree': { name: 'Gray Chachalaca', scientific: 'Ortalis cinereiceps' },
 };
