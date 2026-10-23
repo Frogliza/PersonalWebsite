@@ -64,7 +64,7 @@ const details: Record<string, Details> = {
   'astro/whirlpool-galaxy.jpg': { subject: 'Whirlpool Galaxy', collection: 'galaxies', object: 'whirlpool-galaxy', full: '' },
 
   // ---------- nature
-  'nature/alligator-environment.jpg': { subject: 'Alligator Environment', collection: 'reptiles-and-amphibians', species: 'alligator', full: '' },
+  'nature/alligator-environment.jpg': { subject: 'Alligator Environment', collection: 'reptiles-and-amphibians', species: 'alligator', lead: true, full: '' },
   'nature/alligator-mother.jpg': { subject: 'Alligator Mother', collection: 'reptiles-and-amphibians', species: 'alligator', full: '' },
   'nature/anhinga.jpg': { subject: 'Anhinga', collection: 'birds', species: 'anhinga', full: '' },
   'nature/bananaquit.jpg': { subject: 'Bananaquit', collection: 'birds', species: 'bananaquit', full: '' },
