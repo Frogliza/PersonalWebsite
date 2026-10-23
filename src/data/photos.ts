@@ -93,7 +93,7 @@ const details: Record<string, Details> = {
   'nature/granular-poison-frog.jpg': { subject: 'Granular Poison Frog', collection: 'reptiles-and-amphibians', species: 'granular-poison-frog', full: '' },
   'nature/great-blue-heron-environment.jpg': { subject: 'Great Blue Heron Environment', collection: 'birds', species: 'great-blue-heron', full: '' },
   'nature/great-blue-heron-in-flight.jpg': { subject: 'Great Blue Heron In Flight', collection: 'birds', species: 'great-blue-heron', full: '' },
-  'nature/green-sweat-bee.jpg': { subject: 'Green Sweat Bee', collection: 'arthropods', species: 'green-sweat-bee', full: '' },
+  'nature/green-sweat-bee.jpg': { subject: 'Pure Green Sweat Bee', collection: 'arthropods', species: 'green-sweat-bee', full: '' },
   'nature/howler-monkey.jpg': { subject: 'Mantled Howler Monkey', collection: 'mammals', species: 'howler-monkey'. full: '' },
   'nature/humpback-whale-with-calf.jpg': { subject: 'Humpback Whale Mother & Calf', collection: 'mammals', species: 'humpback-whale', full: '' },
   'nature/katydid-munching-leaf.jpg': { subject: 'Katydid Munching Leaf', collection: 'arthropods', species: 'katydid-munching-leaf', full: '' },
