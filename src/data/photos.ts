@@ -123,7 +123,7 @@ const details: Record<string, Details> = {
   'nature/tropical-flat-snake-portrait.jpg': { subject: 'Tropical Flat Snake Portrait', collection: 'reptiles-and-amphibians', species: 'tropical-flat-snake', full: '' },
   'nature/tropical-flat-snake-wide-portrait.jpg': { subject: 'Tropical Flat Snake Wide Portrait', collection: 'reptiles-and-amphibians', species: 'tropical-flat-snake', full: '' },
   'nature/turkey-vulture.jpg': { subject: 'Turkey Vulture', collection: 'birds', species: 'turkey-vulture', full: '' },
-  'nature/yellow-crystal-macro.jpg': { subject: 'Orange Crystals', collection: 'rocks-and-minerals', species:'Unknown', full: '' },
+  'nature/yellow-crystal-macro.jpg': { subject: 'Orange Crystals', collection: 'rocks-and-minerals', species:'yellow-crystal-macro', full: '' },
   'nature/yellow-throated-toucan.jpg': { subject: 'Yellow-throated Toucan', collection: 'birds', species: 'yellow-throated-toucan', full: '' },
 
   // ---------- misc
