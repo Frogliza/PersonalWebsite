@@ -41,4 +41,7 @@ export const species: Record<string, { name: string; scientific?: string }> = {
   'chachalaca-in-a-tree': { name: 'Gray Chachalaca', scientific: 'Ortalis cinereiceps' },
   'rainforest-toad': { name: 'Rainforest Toad', scientific: 'Incilius aucoinae' },
   'red-thighed-bromeliad-spider': { name: 'Red-thighed Bromeliad Spider', scientific: 'Cupiennius coccineus' },
+  'tityus-scorpion': { name: 'Scorpion (No Common Name)', scientific: 'Tityus dedoslargos' },
+  'orange-butterfly': { name: 'Butterfly (No Common Name)', scientific: 'Heliconius ismenius ssp. clarescens' },
+  'blue-morpho-wing': { name: 'Amathonte Morpho Wing', scientific: 'Morpho amathonte' },
 };
