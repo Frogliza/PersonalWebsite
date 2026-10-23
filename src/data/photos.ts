@@ -20,15 +20,15 @@ export const url = (path: string) => import.meta.env.BASE_URL.replace(/\/$/, '')
    cover: the photo used as the collection's thumbnail, written as 'category/filename',
           e.g. cover: 'nature/great-blue-heron-in-flight.jpg'. Leave '' to use the newest photo. */
 export const collections: { category: Category; key: string; label: string; cover?: string }[] = [
-  { category: 'astro', key: 'galaxies', label: 'Galaxies', cover: 'whirlpool-galaxy.jpg' },
-  { category: 'astro', key: 'nebulae', label: 'Nebulae', cover: 'north-america-and-pelican-nebulae.jpg' },
-  { category: 'astro', key: 'more', label: 'More', cover: 'milkyway-over-elbert.jpg' },
-  { category: 'nature', key: 'birds', label: 'Birds', cover: 'charming-hummingbird.jpg' },
-  { category: 'nature', key: 'mammals', label: 'Mammals', cover: 'central-american-white-faced-capuchin-portrait.jpg' },
-  { category: 'nature', key: 'reptiles-and-amphibians', label: 'Reptiles & Amphibians', cover: 'tropical-flat-snake-wide-portrait.jpg' },
-  { category: 'nature', key: 'arthropods', label: 'Arthropods', cover: 'green-sweat-bee.jpg' },
-  { category: 'nature', key: 'rocks-and-minerals', label: 'Rocks & Minerals', cover: 'yellow-crystal-macro.jpg' },
-  { category: 'misc', key: 'hot-air-balloons', label: 'Hot Air Balloons', cover: 'colorful-balloons.jpg' },
+  { category: 'astro', key: 'galaxies', label: 'Galaxies', cover: 'astro/whirlpool-galaxy.jpg' },
+  { category: 'astro', key: 'nebulae', label: 'Nebulae', cover: 'astro/north-america-and-pelican-nebulae.jpg' },
+  { category: 'astro', key: 'more', label: 'More', cover: 'astro/milkyway-over-elbert.jpg' },
+  { category: 'nature', key: 'birds', label: 'Birds', cover: 'nature/charming-hummingbird.jpg' },
+  { category: 'nature', key: 'mammals', label: 'Mammals', cover: 'nature/central-american-white-faced-capuchin-portrait.jpg' },
+  { category: 'nature', key: 'reptiles-and-amphibians', label: 'Reptiles & Amphibians', cover: 'nature/tropical-flat-snake-wide-portrait.jpg' },
+  { category: 'nature', key: 'arthropods', label: 'Arthropods', cover: 'nature/green-sweat-bee.jpg' },
+  { category: 'nature', key: 'rocks-and-minerals', label: 'Rocks & Minerals', cover: 'nature/yellow-crystal-macro.jpg' },
+  { category: 'misc', key: 'hot-air-balloons', label: 'Hot Air Balloons', cover: 'misc/colorful-balloons.jpg' },
 ];
 
 /* DETAILS for each photo, keyed by 'category/filename'. Every field is optional.
