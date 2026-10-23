@@ -114,7 +114,7 @@ const details: Record<string, Details> = {
   'nature/slaty-tailed-trogan.jpg': { subject: 'Slaty-tailed Trogan', collection: 'birds', species: 'slaty-tailed-trogan', full: '' },
   'nature/squirrel.jpg': { subject: 'Squirrel', collection: 'mammals', full: '' },
   'nature/summer-tanager.jpg': { subject: 'Summer Tanager', collection: 'birds', species: 'summer-tanager', full: '' },
-  'nature/sunlight-through-the-bee-wing.jpg': { subject: 'Eastern Carpenter Bee', collection: 'arthropods', full: '' },
+  'nature/sunlight-through-the-bee-wing.jpg': { subject: 'Eastern Carpenter Bee', collection: 'arthropods', species: 'sunlight-through-the-bee-wing', full: '' },
   'nature/terciopelo-baby.jpg': { subject: 'Terciopelo Baby', collection: 'reptiles-and-amphibians', species: 'terciopelo', full: '' },
   'nature/terciopelo-through-the-grass.jpg': { subject: 'Terciopelo Through The Grass', collection: 'reptiles-and-amphibians', species: 'terciopelo', full: '' },
   'nature/thick-billed-euphonia.jpg': { subject: 'Thick-billed Euphonia', collection: 'birds', species: 'thick-billed-euphonia', full: '' },
