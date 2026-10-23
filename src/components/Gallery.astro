@@ -17,6 +17,7 @@ for (let i = 0; i < items.length; i += perRow) rows.push(items.slice(i, i + perR
         {row.map((it) => (
           <a class="tile" href={url(`/photo/${it.slug}/`) + (from ? '?from=all' : '')} aria-label={`View ${it.name}`} style={`--r:${it.lead.img.width / it.lead.img.height}`}>
             <Image src={it.lead.img} alt={it.name} width={Math.min(1200, it.lead.img.width)} />
+            <span class="tname" aria-hidden="true">{it.name}{(it.scientific || it.catalog) && <small class={it.scientific ? 'it' : undefined}>{it.scientific ?? it.catalog}</small>}</span>
           </a>
         ))}
       </div>

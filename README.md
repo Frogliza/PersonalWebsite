@@ -48,3 +48,10 @@ All colors are variables at the top of `src/styles/site.css` (dark mode first, t
 
 ## Copyright
 See `COPYRIGHT.md`. Photos may be used by anyone as long as they credit Marcus Rust.
+
+## Icon and link previews
+- `public/favicon.svg`, `favicon.ico` and `apple-touch-icon.png` are the browser-tab and home-screen icons.
+- `public/og-default.png` (1200x630) is the preview image when the home page, journal or contact page is shared.
+  Replace it with one of your own photos if you like (keep it 1200x630).
+- Each photo page automatically previews as its own photo. The description text is set in
+  `src/layouts/Base.astro` (default) and `src/pages/photo/[slug].astro` (photo pages).
