@@ -144,6 +144,13 @@ const details: Record<string, Details> = {
   'nature/smallcamospider.jpg': {subject: 'Northern Crab Spider', scientific:'Mecaphesa asperata', lead: true, collection: 'arthropods', date: 'August 2026', full: '' },
   'nature/rainbowbeetle.jpg': {subject: 'Dogbane Leaf Beetle', scientific:'Chrysochus auratus', collection: 'arthropods', date: 'August 2026', full: '' },
   'nature/blackspottedyellowbeetle.jpg': {subject: 'Spotted Cucumber Beetle', scientific:'Diabrotica undecimpunctata', collection: 'arthropods', date: 'August 2026', full: '' },
+  'nature/mantis1.jpg': {subject: 'European Mantis', scientific:'Mantis religiosa', lead: true, collection: 'arthropods', date: 'September 2024', full: '' },
+  'nature/mantis2.jpg': {subject: 'European Mantis', scientific:'Mantis religiosa', collection: 'arthropods', date: 'September 2024', full: '' },
+  'nature/mantis3.jpg': {subject: 'European Mantis', scientific:'Mantis religiosa', collection: 'arthropods', date: 'September 2024', full: '' },
+  'nature/mantis4.jpg': {subject: 'European Mantis', scientific:'Mantis religiosa', collection: 'arthropods', date: 'September 2024', full: '' },
+  'nature/mantis5.jpg': {subject: 'European Mantis', scientific:'Mantis religiosa', collection: 'arthropods', date: 'September 2024', full: '' },
+  'nature/mantis6.jpg': {subject: 'European Mantis', scientific:'Mantis religiosa', collection: 'arthropods', date: 'September 2024', full: '' },
+  'nature/mantis7.jpg': {subject: 'European Mantis', scientific:'Mantis religiosa', collection: 'arthropods', date: 'September 2024', full: '' },
 
   // ---------- nature / rocks-and-minerals
   'nature/yellow-crystal-macro.jpg': { subject: 'Orange Crystals', scientific: 'Unknown', collection: 'rocks-and-minerals', date: 'August 2026', full: '' },
