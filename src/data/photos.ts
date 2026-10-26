@@ -137,7 +137,7 @@ const details: Record<string, Details> = {
   'nature/sunlight-through-the-bee-wing.jpg': { subject: 'Eastern Carpenter Bee', scientific: 'Xylocopa virginica', collection: 'arthropods', date: 'April 2026', full: '' },
   'nature/tityus-scorpion.jpg': { subject: 'Scorpion (No Common Name)', scientific: 'Tityus dedoslargos', collection: 'arthropods', date: 'November 2025', full: '' },
   'nature/nurseryspider.jpg': {subject: 'American Nursery Web Spider', scientific:'Pisaurina mira', collection: 'arthropods', date: 'August 2026', full: '' },
-  'nature/weevil.jpg': {subject: 'Rugged Flower Weevil', scientific:'Odontocorynus salebrosus', collection: 'arthropods', date: 'August 2026', location: , full: '' },
+  'nature/weevil.jpg': {subject: 'Rugged Flower Weevil', scientific:'Odontocorynus salebrosus', collection: 'arthropods', date: 'August 2026', full: '' },
   'nature/steelerscaterpillar.jpg': {subject: 'Orange-tipped Oakworm Moth', scientific:'Anisota senatoria', collection: 'arthropods', date: 'August 2026', full: '' },
   'nature/smallcamospider3.jpg': {subject: 'Northern Crab Spider', scientific:'Mecaphesa asperata', collection: 'arthropods', date: 'August 2026', full: '' },
   'nature/smallcamospider2.jpg': {subject: 'Northern Crab Spider', scientific:'Mecaphesa asperata', collection: 'arthropods', date: 'August 2026', full: '' },
