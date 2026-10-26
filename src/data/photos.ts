@@ -31,13 +31,14 @@ export const collections: { category: Category; key: string; label: string; cove
 /* DETAILS for each photo, keyed by 'category/filename'. Every field is optional.
      subject:    the name shown with the photo (defaults to the filename)
      scientific: an animal's scientific name, shown in small italic text under the name
-     catalog:    a galaxy or nebula's catalog name (e.g. M101), shown in small text under the name
-     (Grouping is automatic: photos with the same scientific name, or the same catalog name, show
-     as ONE tile, and the photo page lists them all in a column. The name, scientific/catalog name
-     and top date come from the lead photo.)
+     catalog:    a celestial objects's catalog name (e.g. M101), shown in small text under the name
+                 (Grouping is automatic: photos with the same scientific name, or the same catalog name, show
+                 as ONE tile, and the photo page lists them all in a column. The name, scientific/catalog name
+                 and top date come from the lead photo.)
      lead:       true on the photo that represents its group (default: the newest one)
      collection: which collection it belongs to (a key from the list above)
-     location:   where it was taken, shown at the right above the photo
+     location:   where it was taken, shown at the right above the photo. In astrophotos, this shows the 
+                 constellation where the object is found.
      date:       month and year, e.g. 'March 2026' ('March 14, 2026' or '2026-03-14' also work).
                  Photos are shown newest first. In a group, the other photos show their own date
                  above them only when it differs from the lead photo's date.
@@ -64,11 +65,11 @@ const details: Record<string, Details> = {
   'astro/veil-nebula.jpg': { subject: 'Veil Nebula (The Cygnus Loop)', catalog: 'SNR G074.0-08.6', collection: 'nebulae', location: 'Cygnus', date: 'June 2023', full: '' },
 
   // ---------- astro / more
-  'astro/2024-solar-eclipse.jpg': { subject: '2024 Solar Eclipse', collection: 'more', location: 'Sol & Luna', date: 'April 2024', full: '' },
-  'astro/aurora-pillars.jpg': { subject: 'Light Pillar', catalog: 'Aurora Borealis', collection: 'more', location: 'Pennsylvania, USA', date: 'October 2024', full: '' },
-  'astro/aurora-pine.jpg': { subject: 'Aurorae in Pennsylvania', catalog: 'Aurora Borealis', lead: true, collection: 'more', location: 'Pennsylvania, USA', date: 'October 2024', full: '' },
-  'astro/coathanger-asterism.jpg': { subject: 'Coathanger Asterism', collection: 'more', location: 'Vulpecula', date: 'June 2024', full: '' },
-  'astro/milkyway-over-elbert.jpg': { subject: 'Milkyway Over Elbert', collection: 'more', location: 'Colorado, USA', date: 'August 2024', full: '' },
+  'astro/2024-solar-eclipse.jpg': { subject: 'Total Solar Eclipse', scientific: 'Sol & Luna', collection: 'more', location: 'Pennsylvania, USA', date: 'April 2024', full: '' },
+  'astro/aurora-pillars.jpg': { subject: 'Light Pillar', scientific: 'Aurora Borealis', collection: 'more', location: 'Pennsylvania, USA', date: 'October 2024', full: '' },
+  'astro/aurora-pine.jpg': { subject: 'Aurorae in Pennsylvania', scientific: 'Aurora Borealis', lead: true, collection: 'more', location: 'Pennsylvania, USA', date: 'October 2024', full: '' },
+  'astro/coathanger-asterism.jpg': { subject: 'Coathanger Asterism', catalog: 'Brocchis Cluster', collection: 'more', location: 'Vulpecula', date: 'June 2024', full: '' },
+  'astro/milkyway-over-elbert.jpg': { subject: 'The Southern Milky Way Over Mount Elbert', catalog: 'Milky Way', collection: 'more', location: 'Colorado, USA', date: 'August 2024', full: '' },
 
   // ---------- nature / birds
   'nature/anhinga.jpg': { subject: 'Anhinga', scientific: 'Anhinga anhinga', collection: 'birds', location: 'Florida, USA', date: 'August 2023', full: '' },
