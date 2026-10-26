@@ -31,34 +31,45 @@ const ow = Math.min(1200, lead.width);
 const og = await getImage({ src: lead, width: ow, height: Math.min(Math.round((ow * 630) / 1200), lead.height), format: 'jpeg' });
 const ogUrl = new URL(og.src, Astro.site ?? 'https://marcusrust.com').href;
 const sub = item.scientific ?? item.catalog;
-const description = `${item.name}${sub ? ` (${sub})` : ''}. Photograph by Marcus Rust.`;
+const description = `${item.name}${sub ? ` (${sub})` : ''}${item.location ? `, ${item.location}` : ''}. Photograph by Marcus Rust.`;
 ---
 <Base section="gallery" title={`${item.name} – Marcus Rust`} description={description} image={ogUrl}>
-  <a class="back" id="back" href={backHref} data-all={url('/')} aria-label="Back" title="Back">
+  <a class="back pback" id="back" href={backHref} data-all={url('/')} aria-label="Back" title="Back">
     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>
   </a>
 
   <div class={single ? 'view single' : 'view'}>
-    <!-- Caption: name, scientific or catalog name, date. Shown without labels. -->
-    <div class="desc">
-      <h1>{item.name}</h1>
-      {item.scientific && <p class="sci">{item.scientific}</p>}
-      {item.catalog && <p class="sci catalog">{item.catalog}</p>}
-      {item.date && <p class="date">{item.date}</p>}
-    </div>
-
     <div class="shots">
-      {item.photos.map((p, i) => (
-        <figure class="shot" style={`--ratio:${p.img.width / p.img.height}`}>
-          {i > 0 && p.date && p.date !== item.date && <p class="shotdate">{p.date}</p>}
-          <div class="big">
-            <Image src={p.img} alt={single ? item.name : `${item.name} (${i + 1} of ${item.photos.length})`} width={Math.min(2400, p.img.width)} loading={i === 0 ? 'eager' : 'lazy'} />
-          </div>
-          {p.full && (
-            <p class="actions"><a class="fullbtn" href={p.full} target="_blank" rel="noopener">Full resolution</a></p>
-          )}
-        </figure>
-      ))}
+      {item.photos.map((p, i) => {
+        /* Top photo: the title row shows name, date and location. Other photos in a group show a date or
+           location above them only when it differs from the top photo's. */
+        const date = i === 0 ? item.date : (p.date && p.date !== item.date ? p.date : '');
+        const place = i === 0 ? item.location : (p.location && p.location !== item.location ? p.location : '');
+        return (
+          <figure class="shot">
+            <div class="frame" style={`--ratio:${p.img.width / p.img.height}`}>
+              {(i === 0 || date || place) && (
+                <div class={i === 0 ? 'bar' : 'bar extra'}>
+                  {i === 0 && (
+                    <h1 class="bl">
+                      <span class="nm">{item.name}</span>
+                      {sub && <span class="sub"> (<span class={item.scientific ? 'it' : undefined}>{sub}</span>)</span>}
+                    </h1>
+                  )}
+                  {date && <p class="bc">{date}</p>}
+                  {place && <p class="br">{place}</p>}
+                </div>
+              )}
+              <div class="big">
+                <Image src={p.img} alt={single ? item.name : `${item.name} (${i + 1} of ${item.photos.length})`} width={Math.min(2400, p.img.width)} loading={i === 0 ? 'eager' : 'lazy'} />
+              </div>
+              {p.full && (
+                <p class="actions"><a class="fullbtn" href={p.full} target="_blank" rel="noopener">Full resolution</a></p>
+              )}
+            </div>
+          </figure>
+        );
+      })}
     </div>
   </div>
 
