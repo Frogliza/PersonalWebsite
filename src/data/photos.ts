@@ -57,7 +57,8 @@ const details: Record<string, Details> = {
   'astro/gecko-nebula.jpg': { subject: 'Gecko Nebula', catalog: 'LBN 437', collection: 'nebulae', location: '', date: 'June 2024', full: '' },
   'astro/nebulae-of-cygnus.jpg': { subject: 'Nebulae of Cygnus', catalog: 'Cygnus', collection: 'nebulae', location: 'Cygnus', date: 'July 2024', full: '' },
   'astro/nebulae-of-monoceros.jpg': { subject: 'Nebulae of Monoceros', catalog: 'Monoceros', collection: 'nebulae', location: 'Monoceros', date: 'November 2023', full: '' },
-  'astro/north-america-and-pelican-nebulae.jpg': { subject: 'North America and Pelican Nebulae', catalog: 'NGC 7000 & IC 5070', collection: 'nebulae', location: 'Cygnus', date: 'June 2024', full: '' },
+  'astro/north-america-and-pelican-nebulae.jpg': { subject: 'North America and Pelican Nebulae', catalog: 'NGC 7000 & IC 5070', lead: true, collection: 'nebulae', date: 'June 2024', full: '' },
+  'astro/north-america-and-pelican-nebulae-starless.jpg': { subject: 'North America and Pelican Nebulae', catalog: 'NGC 7000 & IC 5070', collection: 'nebulae', date: 'June 2024', full: '' },
   'astro/orion-nebula.jpg': { subject: 'Orion Nebula', catalog: 'M42', collection: 'nebulae', location: 'Orion', date: 'November 2024', full: 'https://drive.google.com/file/d/1HXRJZqom2ueJr-fdzx898qJWd0JgYULw/view?usp=sharing' },
   'astro/snr-g653-57.jpg': { subject: 'The "Other" Veil Nebula', catalog: 'SNR G65.3+5.7', collection: 'nebulae', location: 'Cygnus', date: 'August 2024', full: '' },
   'astro/veil-nebula.jpg': { subject: 'Veil Nebula (The Cygnus Loop)', catalog: 'SNR G074.0-08.6', collection: 'nebulae', location: 'Cygnus', date: 'June 2023', full: '' },
@@ -136,7 +137,22 @@ const details: Record<string, Details> = {
   'nature/rocky-mountain-parnassian.jpg': { subject: 'Rocky Mountain Parnassian', scientific: 'Parnassius smintheus', collection: 'arthropods', location: 'Colorado, USA', date: 'September 2025', full: '' },
   'nature/sunlight-through-the-bee-wing.jpg': { subject: 'Eastern Carpenter Bee', scientific: 'Xylocopa virginica', collection: 'arthropods', location: 'Pennsylvania, USA', date: 'April 2026', full: '' },
   'nature/tityus-scorpion.jpg': { subject: 'Scorpion (No Common Name)', scientific: 'Tityus dedoslargos', collection: 'arthropods', location: 'Puntarenas Province, Costa Rica', date: 'November 2025', full: '' },
-
+  'nature/nurseryspider.jpg': {subject: 'American Nursery Web Spider', scientific:'Pisaurina mira', collection: 'arthropods', date: 'August 2026', full: '' },
+  'nature/weevil.jpg': {subject: 'Rugged Flower Weevil', scientific:'Odontocorynus salebrosus', collection: 'arthropods', date: 'August 2026', full: '' },
+  'nature/steelerscaterpillar.jpg': {subject: 'Orange-tipped Oakworm Moth', scientific:'Anisota senatoria', collection: 'arthropods', date: 'August 2026', full: '' },
+  'nature/smallcamospider3.jpg': {subject: 'Northern Crab Spider', scientific:'Mecaphesa asperata', collection: 'arthropods', date: 'August 2026', full: '' },
+  'nature/smallcamospider2.jpg': {subject: 'Northern Crab Spider', scientific:'Mecaphesa asperata', collection: 'arthropods', date: 'August 2026', full: '' },
+  'nature/smallcamospider.jpg': {subject: 'Northern Crab Spider', scientific:'Mecaphesa asperata', lead: true, collection: 'arthropods', date: 'August 2026', full: '' },
+  'nature/rainbowbeetle.jpg': {subject: 'Dogbane Leaf Beetle', scientific:'Chrysochus auratus', collection: 'arthropods', date: 'August 2026', full: '' },
+  'nature/blackspottedyellowbeetle.jpg': {subject: 'Spotted Cucumber Beetle', scientific:'Diabrotica undecimpunctata', collection: 'arthropods', date: 'August 2026', full: '' },
+  'nature/mantis1.jpg': {subject: 'European Mantis', scientific:'Mantis religiosa', lead: true, collection: 'arthropods', date: 'September 2024', full: '' },
+  'nature/mantis2.jpg': {subject: 'European Mantis', scientific:'Mantis religiosa', collection: 'arthropods', date: 'September 2024', full: '' },
+  'nature/mantis3.jpg': {subject: 'European Mantis', scientific:'Mantis religiosa', collection: 'arthropods', date: 'September 2024', full: '' },
+  'nature/mantis4.jpg': {subject: 'European Mantis', scientific:'Mantis religiosa', collection: 'arthropods', date: 'September 2024', full: '' },
+  'nature/mantis5.jpg': {subject: 'European Mantis', scientific:'Mantis religiosa', collection: 'arthropods', date: 'September 2024', full: '' },
+  'nature/mantis6.jpg': {subject: 'European Mantis', scientific:'Mantis religiosa', collection: 'arthropods', date: 'September 2024', full: '' },
+  'nature/mantis7.jpg': {subject: 'European Mantis', scientific:'Mantis religiosa', collection: 'arthropods', date: 'September 2024', full: '' },
+  
   // ---------- nature / rocks-and-minerals
   'nature/yellow-crystal-macro.jpg': { subject: 'Orange Crystals', scientific: 'Unknown', collection: 'rocks-and-minerals', location: 'Terra', date: 'August 2026', full: '' },
 
