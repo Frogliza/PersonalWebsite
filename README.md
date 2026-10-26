@@ -14,10 +14,10 @@
 - **Collections** (Galaxies, Birds, ...) are listed near the top of `src/data/photos.ts`. To pick a
   collection's thumbnail set its `cover`, e.g. `cover: 'nature/great-blue-heron-in-flight.jpg'`.
   Blank means the newest photo in the collection.
-- **Same animal or object:** give those photos the same `group` (e.g. `group: 'alligator'`). They show as one
-  tile, and the photo page lists them in a column. The name, scientific/catalog name and top date come from
-  the lead photo (the newest, or add `lead: true`). The other photos show their own date above them only
-  when it differs from the lead photo's date.
+- **Same animal or object:** photos with the same `scientific` name (or the same `catalog` name) are grouped
+  automatically. They show as one tile, and the photo page lists them in a column. The name,
+  scientific/catalog name and top date come from the lead photo (the newest, or add `lead: true`).
+  The other photos show their own date above them only when it differs from the lead photo's date.
 - **Flipping through photos:** coming from All Photos, Previous/Next follow the All Photos order. Inside a
   collection they stay in that collection.
 

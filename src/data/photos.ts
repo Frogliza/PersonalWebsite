@@ -32,8 +32,9 @@ export const collections: { category: Category; key: string; label: string; cove
      subject:    the name shown with the photo (defaults to the filename)
      scientific: an animal's scientific name, shown in small italic text under the name
      catalog:    a galaxy or nebula's catalog name (e.g. M101), shown in small text under the name
-     group:      photos with the same group show as ONE tile, and the photo page lists them all in a
-                 column. The name, scientific/catalog name and top date come from the lead photo.
+     (Grouping is automatic: photos with the same scientific name, or the same catalog name, show
+     as ONE tile, and the photo page lists them all in a column. The name, scientific/catalog name
+     and top date come from the lead photo.)
      lead:       true on the photo that represents its group (default: the newest one)
      collection: which collection it belongs to (a key from the list above)
      date:       month and year, e.g. 'March 2026' ('March 14, 2026' or '2026-03-14' also work).
@@ -41,7 +42,7 @@ export const collections: { category: Category; key: string; label: string; cove
                  above them only when it differs from the lead photo's date.
      full:       public Google Drive link for the "Full resolution" button */
 type Details = {
-  subject?: string; scientific?: string; catalog?: string; group?: string; lead?: boolean;
+  subject?: string; scientific?: string; catalog?: string; lead?: boolean;
   collection?: string; date?: string; full?: string;
 };
 const details: Record<string, Details> = {
@@ -62,8 +63,8 @@ const details: Record<string, Details> = {
 
   // ---------- astro / more
   'astro/2024-solar-eclipse.jpg': { subject: '2024 Solar Eclipse', collection: 'more', date: 'April 2024', full: '' },
-  'astro/aurora-pillars.jpg': { subject: 'Light Pillar', catalog: 'Aurora Borealis', group: 'aurora', collection: 'more', date: 'October 2024', full: '' },
-  'astro/aurora-pine.jpg': { subject: 'Aurorae in Pennsylvania', catalog: 'Aurora Borealis', lead: true, group: 'aurora', collection: 'more', date: 'October 2024', full: '' },
+  'astro/aurora-pillars.jpg': { subject: 'Light Pillar', catalog: 'Aurora Borealis', collection: 'more', date: 'October 2024', full: '' },
+  'astro/aurora-pine.jpg': { subject: 'Aurorae in Pennsylvania', catalog: 'Aurora Borealis', lead: true, collection: 'more', date: 'October 2024', full: '' },
   'astro/coathanger-asterism.jpg': { subject: 'Coathanger Asterism', collection: 'more', date: 'June 2024', full: '' },
   'astro/milkyway-over-elbert.jpg': { subject: 'Milkyway Over Elbert', collection: 'more', date: 'August 2024', full: '' },
 
@@ -73,13 +74,13 @@ const details: Record<string, Details> = {
   'nature/black-bellied-whistling-ducks-in-flight.jpg': { subject: 'Black-bellied Whistling Duck', scientific: 'Dendrocygna autumnalis', collection: 'birds', date: 'August 2023', full: '' },
   'nature/chachalaca-in-a-tree.jpg': { subject: 'Gray Chachalaca', scientific: 'Ortalis cinereiceps', collection: 'birds', date: 'November 2025', full: '' },
   'nature/charming-hummingbird.jpg': { subject: 'Charming Hummingbird', scientific: 'Amazilia decora', collection: 'birds', date: 'November 2025', full: '' },
-  'nature/common-black-hawk-in-flight.jpg': { subject: 'Common Black Hawk', scientific: 'Buteogallus anthracinus', group: 'common-black-hawk', collection: 'birds', date: 'November 2025', full: '' },
-  'nature/common-black-hawk.jpg': { subject: 'Common Black Hawk', scientific: 'Buteogallus anthracinus',  lead: true, group: 'common-black-hawk', collection: 'birds', date: 'November 2025', full: '' },
+  'nature/common-black-hawk-in-flight.jpg': { subject: 'Common Black Hawk', scientific: 'Buteogallus anthracinus', collection: 'birds', date: 'November 2025', full: '' },
+  'nature/common-black-hawk.jpg': { subject: 'Common Black Hawk', scientific: 'Buteogallus anthracinus', lead: true, collection: 'birds', date: 'November 2025', full: '' },
   'nature/common-loon.jpg': { subject: 'Common Loon', scientific: 'Gavia immer', collection: 'birds', date: 'August 2023', full: '' },
   'nature/crested-guan.jpg': { subject: 'Crested Guan', scientific: 'Penelope purpurascens', collection: 'birds', date: 'November 2025', full: '' },
   'nature/fly-catcher.jpg': { subject: 'Eastern Wood-Pewee', scientific: 'Contopus virens', collection: 'birds', date: 'July 2023', full: '' },
-  'nature/great-blue-heron-environment.jpg': { subject: 'Great Blue Heron', scientific: 'Ardea herodias', lead: true, group: 'great-blue-heron', collection: 'birds', date: 'April 2026', full: '' },
-  'nature/great-blue-heron-in-flight.jpg': { subject: 'Great Blue Heron', scientific: 'Ardea herodias', group: 'great-blue-heron', collection: 'birds', date: 'April 2026', full: '' },
+  'nature/great-blue-heron-environment.jpg': { subject: 'Great Blue Heron', scientific: 'Ardea herodias', lead: true, collection: 'birds', date: 'April 2026', full: '' },
+  'nature/great-blue-heron-in-flight.jpg': { subject: 'Great Blue Heron', scientific: 'Ardea herodias', collection: 'birds', date: 'April 2026', full: '' },
   'nature/reddish-egret.jpg': { subject: 'Reddish Egret', scientific: 'Egretta rufescens', collection: 'birds', date: 'May 2024', full: '' },
   'nature/road-hawk.jpg': { subject: 'Road Hawk', scientific: 'Rupornis magnirostris', collection: 'birds', date: 'November 2025', full: '' },
   'nature/scarlet-rumped-tanager.jpg': { subject: 'Scarlet-rumped Tanager', scientific: 'Ramphocelus passerinii', collection: 'birds', date: 'November 2025', full: '' },
@@ -93,42 +94,42 @@ const details: Record<string, Details> = {
   'nature/big-horn-sheep.jpg': { subject: 'Big-horn Sheep', scientific: 'Ovis canadensis', collection: 'mammals', date: 'September 2025', full: '' },
   'nature/central-american-spider-monkey-mother.jpg': { subject: 'Central American Spider Monkey', scientific: 'Ateles geoffroyi', collection: 'mammals', date: 'November 2025', full: '' },
   'nature/central-american-squirrel-monkey.jpg': { subject: 'Central American Squirrel Monkey', scientific: 'Saimiri oerstedii', collection: 'mammals', date: 'November 2025', full: '' },
-  'nature/central-american-white-faced-capuchin-looking-up.jpg': { subject: 'Central American White-faced Capuchin', scientific: 'Cebus imitator', group: 'central-american-white-faced-capuchin', collection: 'mammals', date: 'November 2025', full: '' },
-  'nature/central-american-white-faced-capuchin-portrait.jpg': { subject: 'Central American White-faced Capuchin', scientific: 'Cebus imitator', lead: true, group: 'central-american-white-faced-capuchin', collection: 'mammals', date: 'November 2025', full: '' },
-  'nature/central-american-white-faced-capuchin.jpg': { subject: 'Central American White-faced Capuchin', scientific: 'Cebus imitator', group: 'central-american-white-faced-capuchin', collection: 'mammals', date: 'November 2025', full: '' },
+  'nature/central-american-white-faced-capuchin-looking-up.jpg': { subject: 'Central American White-faced Capuchin', scientific: 'Cebus imitator', collection: 'mammals', date: 'November 2025', full: '' },
+  'nature/central-american-white-faced-capuchin-portrait.jpg': { subject: 'Central American White-faced Capuchin', scientific: 'Cebus imitator', lead: true, collection: 'mammals', date: 'November 2025', full: '' },
+  'nature/central-american-white-faced-capuchin.jpg': { subject: 'Central American White-faced Capuchin', scientific: 'Cebus imitator', collection: 'mammals', date: 'November 2025', full: '' },
   'nature/howler-monkey.jpg': { subject: 'Mantled Howler Monkey', scientific: 'Alouatta palliata', collection: 'mammals', date: 'November 2025', full: '' },
   'nature/humpback-whale-with-calf.jpg': { subject: 'Humpback Whale', scientific: 'Megaptera novaeangliae', collection: 'mammals', date: 'November 2025', full: '' },
   'nature/northern-tamandua.jpg': { subject: 'Northern Tamandua', scientific: 'Tamandua mexicana', collection: 'mammals', date: 'November 2025', full: '' },
   'nature/squirrel.jpg': { subject: 'Rock Squirrel', scientific: 'Otospermophilus variegatus', collection: 'mammals', date: 'September 2025', full: '' },
 
   // ---------- nature / reptiles-and-amphibians
-  'nature/alligator-environment.jpg': { subject: 'American Alligator', scientific: 'Alligator mississippiensis', lead: true, group: 'alligator', collection: 'reptiles-and-amphibians', date: 'August 2023', full: '' },
-  'nature/alligator-mother.jpg': { subject: 'American Alligator', scientific: 'Alligator mississippiensis', group: 'alligator', collection: 'reptiles-and-amphibians', date: 'May 2024', full: '' },
+  'nature/alligator-environment.jpg': { subject: 'American Alligator', scientific: 'Alligator mississippiensis', lead: true, collection: 'reptiles-and-amphibians', date: 'August 2023', full: '' },
+  'nature/alligator-mother.jpg': { subject: 'American Alligator', scientific: 'Alligator mississippiensis', collection: 'reptiles-and-amphibians', date: 'May 2024', full: '' },
   'nature/black-spiny-tailed-iguana-portrait.jpg': { subject: 'Black Spiny-tailed Iguana', scientific: 'Ctenosaura similis', collection: 'reptiles-and-amphibians', date: 'November 2025', full: '' },
-  'nature/common-blunt-headed-tree-snake-close.jpg': { subject: 'Common Blunt-headed Tree Snake', scientific: 'Imantodes cenchoa', group: 'common-blunt-headed-tree-snake', collection: 'reptiles-and-amphibians', date: 'November 2025', full: '' },
-  'nature/common-blunt-headed-tree-snake-periscope.jpg': { subject: 'Common Blunt-headed Tree Snake', scientific: 'Imantodes cenchoa', group: 'common-blunt-headed-tree-snake', collection: 'reptiles-and-amphibians', date: 'November 2025', full: '' },
-  'nature/common-blunt-headed-tree-snake-portrait.jpg': { subject: 'Common Blunt-headed Tree Snake', scientific: 'Imantodes cenchoa', lead: true, group: 'common-blunt-headed-tree-snake', collection: 'reptiles-and-amphibians', date: 'November 2025', full: '' },
+  'nature/common-blunt-headed-tree-snake-close.jpg': { subject: 'Common Blunt-headed Tree Snake', scientific: 'Imantodes cenchoa', collection: 'reptiles-and-amphibians', date: 'November 2025', full: '' },
+  'nature/common-blunt-headed-tree-snake-periscope.jpg': { subject: 'Common Blunt-headed Tree Snake', scientific: 'Imantodes cenchoa', collection: 'reptiles-and-amphibians', date: 'November 2025', full: '' },
+  'nature/common-blunt-headed-tree-snake-portrait.jpg': { subject: 'Common Blunt-headed Tree Snake', scientific: 'Imantodes cenchoa', lead: true, collection: 'reptiles-and-amphibians', date: 'November 2025', full: '' },
   'nature/eastern-garter-portrait.jpg': { subject: 'Eastern Garter Snake', scientific: 'Thamnophis sirtalis', collection: 'reptiles-and-amphibians', date: 'October 2025', full: '' },
   'nature/gopher-tortoise.jpg': { subject: 'Gopher Tortoise', scientific: 'Gopherus polyphemus', collection: 'reptiles-and-amphibians', date: 'May 2024', full: '' },
   'nature/granular-poison-frog.jpg': { subject: 'Granular Poison Frog', scientific: 'Oophaga granulifera', collection: 'reptiles-and-amphibians', date: 'November 2025', full: '' },
-  'nature/ornate-cat-eyed-snake-portrait.jpg': { subject: 'Ornate Cat-eyed Snake', scientific: 'Leptodeira ornata', lead: true, group: 'ornate-cat-eyed-snake', collection: 'reptiles-and-amphibians', date: 'November 2025', full: '' },
-  'nature/ornate-cat-eyed-snake.jpg': { subject: 'Ornate Cat-eyed Snake', scientific: 'Leptodeira ornata', group: 'ornate-cat-eyed-snake', collection: 'reptiles-and-amphibians', date: 'November 2025', full: '' },
+  'nature/ornate-cat-eyed-snake-portrait.jpg': { subject: 'Ornate Cat-eyed Snake', scientific: 'Leptodeira ornata', lead: true, collection: 'reptiles-and-amphibians', date: 'November 2025', full: '' },
+  'nature/ornate-cat-eyed-snake.jpg': { subject: 'Ornate Cat-eyed Snake', scientific: 'Leptodeira ornata', collection: 'reptiles-and-amphibians', date: 'November 2025', full: '' },
   'nature/prairie-lizard.jpg': { subject: 'Prairie Lizard', scientific: 'Sceloporus consobrinus', collection: 'reptiles-and-amphibians', date: 'September 2025', full: '' },
   'nature/rainforest-toad.jpg': { subject: 'Rainforest Toad', scientific: 'Incilius aucoinae', collection: 'reptiles-and-amphibians', date: 'November 2025', full: '' },
-  'nature/terciopelo-baby.jpg': { subject: 'Terciopelo', scientific: 'Bothrops asper', group: 'terciopelo', collection: 'reptiles-and-amphibians', date: 'November 2025', full: '' },
-  'nature/terciopelo-through-the-grass.jpg': { subject: 'Terciopelo', scientific: 'Bothrops asper', lead: true, group: 'terciopelo', collection: 'reptiles-and-amphibians', date: 'November 2025', full: '' },
-  'nature/tropical-flat-snake-gaze.jpg': { subject: 'Tropical Flat Snake', scientific: 'Siphlophis compressus', group: 'tropical-flat-snake', collection: 'reptiles-and-amphibians', date: 'November 2025', full: '' },
-  'nature/tropical-flat-snake-portrait.jpg': { subject: 'Tropical Flat Snake', scientific: 'Siphlophis compressus', group: 'tropical-flat-snake', collection: 'reptiles-and-amphibians', date: 'November 2025', full: '' },
-  'nature/tropical-flat-snake-wide-portrait.jpg': { subject: 'Tropical Flat Snake', scientific: 'Siphlophis compressus', lead: true, group: 'tropical-flat-snake', collection: 'reptiles-and-amphibians', date: 'November 2025', full: '' },
+  'nature/terciopelo-baby.jpg': { subject: 'Terciopelo', scientific: 'Bothrops asper', collection: 'reptiles-and-amphibians', date: 'November 2025', full: '' },
+  'nature/terciopelo-through-the-grass.jpg': { subject: 'Terciopelo', scientific: 'Bothrops asper', lead: true, collection: 'reptiles-and-amphibians', date: 'November 2025', full: '' },
+  'nature/tropical-flat-snake-gaze.jpg': { subject: 'Tropical Flat Snake', scientific: 'Siphlophis compressus', collection: 'reptiles-and-amphibians', date: 'November 2025', full: '' },
+  'nature/tropical-flat-snake-portrait.jpg': { subject: 'Tropical Flat Snake', scientific: 'Siphlophis compressus', collection: 'reptiles-and-amphibians', date: 'November 2025', full: '' },
+  'nature/tropical-flat-snake-wide-portrait.jpg': { subject: 'Tropical Flat Snake', scientific: 'Siphlophis compressus', lead: true, collection: 'reptiles-and-amphibians', date: 'November 2025', full: '' },
 
   // ---------- nature / arthropods
   'nature/blue-morpho-wing.jpg': { subject: 'Amathonte Morpho Wing', scientific: 'Morpho amathonte', collection: 'arthropods', date: 'November 2025', full: '' },
   'nature/fly-on-yellow-flower.jpg': { subject: 'Swift Feather-legged Fly', scientific: 'Trichopoda pennipes', collection: 'arthropods', date: 'October 2025', full: '' },
   'nature/green-sweat-bee.jpg': { subject: 'Pure Green Sweat Bee', scientific: 'Augochlora pura', collection: 'arthropods', date: 'October 2025', full: '' },
   'nature/katydid-munching-leaf.jpg': { subject: 'Katydid', scientific: 'Family Tettigoniidae', collection: 'arthropods', date: 'October 2025', full: '' },
-  'nature/leaf-cutter-ant-focus.jpg': { subject: 'Leaf Cutter Ants', scientific: 'Atta', lead: true, group: 'leaf-cutter-ant', collection: 'arthropods', date: 'November 2025', full: '' },
-  'nature/leaf-cutter-ant-march.jpg': { subject: 'Leaf Cutter Ants', scientific: 'Atta', group: 'leaf-cutter-ant', collection: 'arthropods', date: 'November 2025', full: '' },
-  'nature/leaf-cutter-ant-standoff.jpg': { subject: 'Leaf Cutter Ants', scientific: 'Atta', group: 'leaf-cutter-ant', collection: 'arthropods', date: 'November 2025', full: '' },
+  'nature/leaf-cutter-ant-focus.jpg': { subject: 'Leaf Cutter Ants', scientific: 'Atta', lead: true, collection: 'arthropods', date: 'November 2025', full: '' },
+  'nature/leaf-cutter-ant-march.jpg': { subject: 'Leaf Cutter Ants', scientific: 'Atta', collection: 'arthropods', date: 'November 2025', full: '' },
+  'nature/leaf-cutter-ant-standoff.jpg': { subject: 'Leaf Cutter Ants', scientific: 'Atta', collection: 'arthropods', date: 'November 2025', full: '' },
   'nature/orange-butterfly.jpg': { subject: 'Butterfly (No Common Name)', scientific: 'Heliconius ismenius ssp. clarescens', collection: 'arthropods', date: 'November 2025', full: '' },
   'nature/red-thighed-bromeliad-spider.jpg': { subject: 'Red-thighed Bromeliad Spider', scientific: 'Cupiennius coccineus', collection: 'arthropods', date: 'November 2025', full: '' },
   'nature/rocky-mountain-parnassian.jpg': { subject: 'Rocky Mountain Parnassian', scientific: 'Parnassius smintheus', collection: 'arthropods', date: 'September 2025', full: '' },
@@ -175,23 +176,26 @@ for (const p of photos) {
   if (p.date && Number.isNaN(Date.parse(p.date))) console.warn(`[photos.ts] Can't read the date "${p.date}" for ${p.file}. Use a format like "March 2026".`);
 }
 
-/* ITEMS: what the galleries show. Photos with the same group become one item. */
+/* ITEMS: what the galleries show. Photos with the same scientific or catalog name become one item. */
 export type Item = {
   slug: string; category: Category; collection: string; name: string;
   scientific?: string; catalog?: string; date?: string; photos: Photo[]; lead: Photo;
 };
 
+/* Grouping is automatic: same scientific name (or same catalog name) = same group. */
+const clean = (s?: string) => (s ?? '').trim().toLowerCase();
+const groupKey = (p: Photo) => (clean(p.scientific) ? 's:' + clean(p.scientific) : clean(p.catalog) ? 'c:' + clean(p.catalog) : 'p:' + p.slug);
 const groups = new Map<string, Photo[]>();
 for (const p of photos) {
-  const key = p.group ? 'g:' + p.group : 'p:' + p.slug;
+  const key = groupKey(p);
   groups.set(key, [...(groups.get(key) ?? []), p]);
 }
 
-export const items: Item[] = [...groups.values()].map((list) => {
+export const items: Item[] = [...groups.entries()].map(([key, list]) => {
   const lead = list.find((p) => p.lead) ?? list[0];
   const pick = (f: 'scientific' | 'catalog') => lead[f] || list.find((p) => p[f])?.[f] || undefined;
   return {
-    slug: lead.group ?? lead.slug,
+    slug: list.length > 1 ? key.slice(2).replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '') : lead.slug,
     category: lead.category,
     collection: lead.collection ?? '',
     name: lead.subject,
