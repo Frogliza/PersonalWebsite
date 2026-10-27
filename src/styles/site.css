@@ -2,7 +2,7 @@
 :root[data-theme=light]{--bg:#DCD7C9;--fg:#2C3930;--mute:#4F5E53;--line:#BFB9A8;--hold:#CBC6B6;--accent:#A27B5C;--accent-text:#75533A;--focus:#75533A;--btn-bg:#3F4F44;--btn-fg:#DCD7C9;--btn-bd:#3F4F44;--btn-hbg:#2C3930;--btn-hbd:#2C3930;color-scheme:light}
 *{box-sizing:border-box}
 [hidden]{display:none !important}
-body{margin:0;background:var(--bg);color:var(--fg);font:400 16px/1.55 Manrope,system-ui,sans-serif}
+body{margin:0;background:var(--bg);color:var(--fg);font:400 16px/1.55 Manrope,system-ui,sans-serif;min-height:100vh;min-height:100dvh;display:flex;flex-direction:column}
 a{color:inherit;text-underline-offset:5px;text-decoration-thickness:1px}
 :focus-visible{outline:3px solid var(--focus);outline-offset:3px}
 
@@ -18,7 +18,8 @@ a{color:inherit;text-underline-offset:5px;text-decoration-thickness:1px}
 .track::after{content:"";position:absolute;top:3px;left:3px;width:16px;height:16px;border-radius:50%;background:var(--fg);transition:transform .2s}
 .sw[aria-checked=true] .track::after{transform:translateX(18px)}
 
-.page{padding:0 48px 72px}
+.page{position:relative;flex:1 0 auto;padding:0 48px 72px}
+.page.photopage{padding-bottom:24px}
 .cats{display:flex;justify-content:center;gap:16px;padding:8px 0 32px;color:var(--mute)}
 .cats a{text-decoration:none}
 .cats a:hover{color:var(--fg)}
@@ -46,22 +47,29 @@ a{color:inherit;text-underline-offset:5px;text-decoration-thickness:1px}
 .post h2{margin:4px 0 8px;font-size:22px;line-height:1.25}
 .post time{color:var(--mute);font-size:14px}
 .post p{margin:0;color:var(--mute)}
-.foot{padding:24px 48px;color:var(--mute);font-size:14px;border-top:1px solid var(--line)}
+.foot{padding:20px 48px 16px;color:var(--mute);font-size:14px;border-bottom:1px solid var(--line)}
 
 /* Photo page: subject and date above the photo */
 .back{display:inline-flex;margin:0 0 16px;padding:6px;color:var(--mute)}
 .back:hover{color:var(--fg)}
 .back svg{display:block}
 .view{display:block}
-.desc{margin:0 0 20px;text-align:center}
-.desc h1{margin:0 0 4px;font-size:22px;line-height:1.25;font-weight:600;letter-spacing:-.01em}
-.desc .date{margin:0;color:var(--mute);font-size:15px}
-.desc .sci{margin:0;color:var(--mute);font-size:15px;font-style:italic}
-.desc .catalog{font-style:normal}
 .shots{display:flex;flex-direction:column;align-items:center;gap:32px}
 .shot{margin:0;width:100%}
-.shotdate{margin:0 0 10px;color:var(--mute);font-size:15px;text-align:center}
-.big img{display:block;width:min(calc(74vh * var(--ratio)),100%);height:auto;margin:0 auto;background:var(--hold)}
+.pback{position:absolute;left:6px;top:8px;margin:0}
+/* The photo is sized to fit the window (--chrome = header, title row, button and footer), so a
+   single-photo page does not need a scroll bar. */
+.frame{--chrome:320px;display:flex;flex-direction:column;width:min(max(calc((100vh - var(--chrome)) * var(--ratio)),260px),100%);width:min(max(calc((100dvh - var(--chrome)) * var(--ratio)),260px),100%);margin:0 auto}
+/* Title row: name over scientific/catalog name on the left, date over location on the right */
+.bar{display:grid;grid-template-columns:minmax(0,1fr) fit-content(45%);column-gap:24px;align-items:baseline;align-content:end;height:49px;margin:8px 0}
+.bar.extra{height:auto;margin:0 0 8px}
+.bl{grid-column:1;grid-row:1;margin:0;font-size:22px;line-height:1.25;font-weight:600;letter-spacing:-.01em}
+.bs,.bc,.br{margin:0;color:var(--mute);font-size:15px;line-height:1.4}
+.bs{grid-column:1;grid-row:2}
+.bs.it{font-style:italic}
+.bc{grid-column:2;grid-row:1;text-align:right}
+.br{grid-column:2;grid-row:2;text-align:right}
+.big img{display:block;width:100%;height:auto;background:var(--hold)}
 .arrow{position:fixed;top:50%;transform:translateY(-50%);display:flex;align-items:center;justify-content:center;width:40px;height:40px;border:1px solid var(--line);border-radius:50%;background:var(--bg);color:var(--fg);text-decoration:none}
 .arrow:hover{border-color:var(--accent)}
 .arrow svg{display:block}
@@ -77,8 +85,8 @@ a{color:inherit;text-underline-offset:5px;text-decoration-thickness:1px}
 /* Collections: piles of photos with a tan border */
 .catbar{position:relative}
 .catbar .back{position:absolute;left:0;top:0;margin:0}
-.piles{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;justify-content:center;gap:48px 32px}
-.piles li{flex:0 0 min(calc((100% - 64px) / 3), 600px);min-width:0}
+.piles{list-style:none;margin:0;padding:0;display:flex;justify-content:center;gap:40px 32px}
+.piles li{flex:1 1 0;min-width:0;max-width:340px}
 .pile{display:block;text-align:center;text-decoration:none}
 .stack{position:relative;display:block;aspect-ratio:4/3;margin:14px 12px 0}
 .sheet{position:absolute;inset:0;background:var(--accent);box-shadow:0 1px 5px rgba(0,0,0,.4)}
@@ -137,13 +145,18 @@ a{color:inherit;text-underline-offset:5px;text-decoration-thickness:1px}
   .page{padding:0 20px 48px}
   .cats{padding-bottom:20px}
   .catbar .back{position:static;margin:0 0 4px}
-  .view.single{display:flex;flex-direction:column}
-  .view.single .shots{order:1}
-  .view.single .desc{order:2;margin:20px 0 0}
   .arrow{display:none}
   .pn{display:flex}
+  .pback{position:static;margin:0 0 4px}
+  .shots{gap:24px}
+  .bar{display:block;height:auto;margin:0 0 14px;text-align:center}
+  .frame{width:100%}
+  .bar .bl,.bar .bs,.bar .bc,.bar .br{text-align:center}
+  .view.single .big{order:1}
+  .view.single .actions{order:2}
+  .view.single .bar{order:3;margin:16px 0 0}
   .about-foot{padding:24px 20px}
   .about-foot h2{font-size:15px;margin-bottom:8px}
   .about-foot p{font-size:13px}
-  .foot{padding:20px}
+  .foot{padding:16px 20px 14px}
 }
