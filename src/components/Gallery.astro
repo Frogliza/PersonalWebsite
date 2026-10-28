@@ -2,25 +2,49 @@
 import { Image } from 'astro:assets';
 import { url } from '../data/photos';
 
-const { items, from = false, perRow = 4 } = Astro.props;
+/* perRow: photos per row on desktop. mobilePerRow (optional): photos per row on phones and tablets;
+   leave it out to show one photo per row there. */
+const { items, from = false, perRow = 4, mobilePerRow = 0 } = Astro.props;
 
-/* Photos per row on desktop (All Photos: 5, collections: 3). */
-const rows = [];
-for (let i = 0; i < items.length; i += perRow) rows.push(items.slice(i, i + perRow));
+const chunk = (n) => {
+  const rows = [];
+  for (let i = 0; i < items.length; i += n) rows.push(items.slice(i, i + n));
+  return rows;
+};
+const rows = chunk(perRow);
+const mobileRows = mobilePerRow ? chunk(mobilePerRow) : [];
+const href = (it) => url(`/photo/${it.slug}/`) + (from ? '?from=all' : '');
+const ratio = (it) => `--r:${it.lead.img.width / it.lead.img.height}`;
 ---
 {items.length === 0 ? (
   <p class="empty">No photos here yet.</p>
 ) : (
-  <div class="grid" style={`--n:${perRow}`}>
-    {rows.map((row) => (
-      <div class={row.length < perRow ? 'row last' : 'row'}>
-        {row.map((it) => (
-          <a class="tile" href={url(`/photo/${it.slug}/`) + (from ? '?from=all' : '')} aria-label={`View ${it.name}`} style={`--r:${it.lead.img.width / it.lead.img.height}`}>
-            <Image src={it.lead.img} alt={it.name} width={Math.min(1200, it.lead.img.width)} />
-            <span class="tname" aria-hidden="true">{it.name}{(it.scientific || it.catalog) && <small class={it.scientific ? 'it' : undefined}>{it.scientific ?? it.catalog}</small>}</span>
-          </a>
+  <>
+    <div class={mobilePerRow ? 'grid dsk' : 'grid'} style={`--n:${perRow}`}>
+      {rows.map((row) => (
+        <div class={row.length < perRow ? 'row last' : 'row'}>
+          {row.map((it) => (
+            <a class="tile" href={href(it)} aria-label={`View ${it.name}`} style={ratio(it)}>
+              <Image src={it.lead.img} alt={it.name} width={Math.min(1200, it.lead.img.width)} />
+              <span class="tname" aria-hidden="true">{it.name}{(it.scientific || it.catalog) && <small class={it.scientific ? 'it' : undefined}>{it.scientific ?? it.catalog}</small>}</span>
+            </a>
+          ))}
+        </div>
+      ))}
+    </div>
+
+    {mobilePerRow > 0 && (
+      <div class="gridm" style={`--n:${mobilePerRow}`}>
+        {mobileRows.map((row) => (
+          <div class={row.length < mobilePerRow ? 'row last' : 'row'}>
+            {row.map((it) => (
+              <a class="tile" href={href(it)} aria-label={`View ${it.name}`} style={ratio(it)}>
+                <Image src={it.lead.img} alt={it.name} width={Math.min(500, it.lead.img.width)} />
+              </a>
+            ))}
+          </div>
         ))}
       </div>
-    ))}
-  </div>
+    )}
+  </>
 )}
