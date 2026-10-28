@@ -8,7 +8,7 @@
 - Put one web-sized JPEG per photo (about 2400px on the long edge) in
   `src/assets/photos/astro/`, `nature/` or `misc/`. Use lowercase names like `orion-nebula.jpg`.
 - Astro makes the thumbnails and page-sized images itself.
-- Every photo shows in **All Photos** (the home page). Give each photo one line in `src/data/photos.ts`:
+- Every photo shows in **All** (the home page). Give each photo one line in `src/data/photos.ts`:
   `subject` (the display name), `scientific` (animals) or `catalog` (galaxies and nebulae), `collection`, `location`,
   `date` (month and year, e.g. `March 2026`) and the Google Drive `full` link. Photos are sorted newest first.
 - **Collections** (Galaxies, Birds, ...) are listed near the top of `src/data/photos.ts`. To pick a
@@ -18,7 +18,7 @@
   automatically. They show as one tile, and the photo page lists them in a column. The name,
   scientific/catalog name and top date come from the lead photo (the newest, or add `lead: true`).
   The other photos show their own date above them only when it differs from the lead photo's date.
-- **Flipping through photos:** coming from All Photos, Previous/Next follow the All Photos order. Inside a
+- **Flipping through photos:** coming from All, Previous/Next follow the All order. Inside a
   collection they stay in that collection.
 
 ## Journal

@@ -2,9 +2,9 @@ import type { ImageMetadata } from 'astro';
 
 export type Category = 'astro' | 'nature' | 'misc';
 
-/* Buttons shown above the gallery. "All Photos" is the home page. */
+/* Buttons shown above the gallery. "All" is the home page. */
 export const categories = [
-  { key: 'all', label: 'All Photos', href: '/' },
+  { key: 'all', label: 'All', href: '/' },
   { key: 'astro', label: 'Astro', href: '/astro/' },
   { key: 'nature', label: 'Nature', href: '/nature/' },
   { key: 'misc', label: 'Misc', href: '/misc/' },
