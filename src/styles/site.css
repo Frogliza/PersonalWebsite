@@ -1,5 +1,5 @@
-:root{--pile:#ECEAE4;--bg:#000000;--fg:#DCD7C9;--mute:#A9AB9D;--line:#2B2B2B;--hold:#262626;--accent:#A27B5C;--accent-text:#C2A084;--focus:#C2A084;--btn-bg:transparent;--btn-fg:#C2A084;--btn-bd:#A27B5C;--btn-hbg:transparent;--btn-hbd:#C2A084;color-scheme:dark}
-:root[data-theme=light]{--pile:#F4F2EC;--bg:#DCD7C9;--fg:#2C3930;--mute:#4F5E53;--line:#BFB9A8;--hold:#CBC6B6;--accent:#A27B5C;--accent-text:#75533A;--focus:#75533A;--btn-bg:#3F4F44;--btn-fg:#DCD7C9;--btn-bd:#3F4F44;--btn-hbg:#2C3930;--btn-hbd:#2C3930;color-scheme:light}
+:root{--bg:#000000;--fg:#DCD7C9;--mute:#A9AB9D;--line:#2B2B2B;--hold:#262626;--accent:#A27B5C;--accent-text:#C2A084;--focus:#C2A084;--btn-bg:transparent;--btn-fg:#C2A084;--btn-bd:#A27B5C;--btn-hbg:transparent;--btn-hbd:#C2A084;color-scheme:dark}
+:root[data-theme=light]{--bg:#DCD7C9;--fg:#2C3930;--mute:#4F5E53;--line:#BFB9A8;--hold:#CBC6B6;--accent:#A27B5C;--accent-text:#75533A;--focus:#75533A;--btn-bg:#3F4F44;--btn-fg:#DCD7C9;--btn-bd:#3F4F44;--btn-hbg:#2C3930;--btn-hbd:#2C3930;color-scheme:light}
 *{box-sizing:border-box}
 [hidden]{display:none !important}
 body{margin:0;background:var(--bg);color:var(--fg);font:400 16px/1.55 Georgia,'Times New Roman',serif;min-height:100vh;min-height:100dvh;display:flex;flex-direction:column}
@@ -86,18 +86,19 @@ a{color:inherit;text-underline-offset:5px;text-decoration-thickness:1px}
 /* Collections: piles of photos with a tan border */
 .catbar{position:relative}
 .catbar .back{position:absolute;left:0;top:0;margin:0}
-.piles{list-style:none;margin:0;padding:0;display:flex;justify-content:center;gap:40px 32px}
-.piles li{flex:1 1 0;min-width:0;max-width:340px}
-.pile{display:block;text-align:center;text-decoration:none}
-.stack{position:relative;display:block;aspect-ratio:4/3;margin:14px 12px 0}
-.sheet{position:absolute;inset:0;background:var(--pile);box-shadow:0 1px 5px rgba(0,0,0,.4)}
-.sheet.s1{transform:rotate(-5deg);filter:brightness(.75)}
-.sheet.s2{transform:rotate(4deg);filter:brightness(.88)}
-.ptop{position:absolute;inset:0;padding:8px;background:var(--pile);box-shadow:0 2px 8px rgba(0,0,0,.45);transition:transform .2s}
-.ptop img,.ptop .nocover{display:block;width:100%;height:100%;object-fit:cover;background:var(--hold)}
-.pile:hover .ptop{transform:translateY(-4px)}
-.pname{display:block;margin-top:24px;font-weight:600}
-.pcount{display:block;color:var(--mute);font-size:15px}
+/* Collections: three per row, sized so two rows fit on screen. The card width is the smallest of
+   510px, one third of the page, and what two rows of 4:3 cards can use of the window's height. */
+.piles{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;justify-content:center;gap:28px 32px}
+.piles li{flex:0 0 auto;width:max(260px,min(510px,calc((100% - 64px) / 3),calc((100vh - 205px) * .6667)));width:max(260px,min(510px,calc((100% - 64px) / 3),calc((100dvh - 205px) * .6667)))}
+.pile{display:block;text-decoration:none}
+.pcard{position:relative;display:block;aspect-ratio:4/3;container-type:inline-size;overflow:hidden;background:var(--bg);border:2px solid var(--fg)}
+.pimg,.pcard .nocover{position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:cover;opacity:.55;transition:opacity .2s}
+.pcard .nocover{background:var(--hold)}
+.pile:hover .pimg{opacity:.8}
+.pov{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:12px;text-align:center;text-shadow:0 1px 14px var(--bg),0 0 3px var(--bg)}
+.pname{display:block;font-size:clamp(24px,9cqw,48px);font-weight:700;line-height:1.1;letter-spacing:-.01em;color:var(--fg)}
+.pname span{display:block}
+.pcount{display:block;margin-top:8px;font-size:15px;color:var(--fg)}
 
 /* Journal thumbnails */
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
@@ -127,7 +128,7 @@ a{color:inherit;text-underline-offset:5px;text-decoration-thickness:1px}
 .about-foot + .foot{border-top:0}
 
 .empty{color:var(--mute);text-align:center;padding:40px 0}
-@media (prefers-reduced-motion:reduce){.track::after,.ptop,.tname{transition:none}}
+@media (prefers-reduced-motion:reduce){.track::after,.pimg,.tname{transition:none}}
 
 /* Smaller screens */
 @media (max-width:900px){
@@ -140,7 +141,7 @@ a{color:inherit;text-underline-offset:5px;text-decoration-thickness:1px}
   .gridm .row{display:flex;gap:var(--gap)}
   .gridm .tile{margin-bottom:0}
   .piles{flex-direction:column;flex-wrap:nowrap;align-items:center}
-  .piles li{flex:none;width:min(100%,360px)}
+  .piles li{flex:none;width:min(100%,420px)}
 }
 @media (max-width:700px){
   .top{position:relative;flex-direction:column;align-items:center;gap:8px;padding:18px 20px}

@@ -10,6 +10,10 @@ export function getStaticPaths() {
 const { category } = Astro.params;
 const label = categories.find((c) => c.key === category)?.label;
 const list = collectionList.filter((c) => c.category === category);
+
+/* Collections whose name is shown on three lines, split at the "&" (Reptiles / & / Amphibians). */
+const threeLines = ['reptiles-and-amphibians'];
+const lines = (c) => (threeLines.includes(c.key) ? c.label.split(/ (&) /) : [c.label]);
 ---
 <Base section="gallery" title={`${label} – Marcus Rust`}>
   <CatNav active={category} />
@@ -17,17 +21,15 @@ const list = collectionList.filter((c) => c.category === category);
     {list.map((c) => (
       <li>
         <a class="pile" href={url(`/${c.category}/${c.key}/`)}>
-          <span class="stack">
-            <span class="sheet s1"></span>
-            <span class="sheet s2"></span>
-            <span class="ptop">
-              {c.coverImg
-                ? <Image src={c.coverImg} alt="" width={Math.min(800, c.coverImg.width)} />
-                : <span class="nocover"></span>}
+          <span class="pcard">
+            {c.coverImg
+              ? <Image class="pimg" src={c.coverImg} alt="" width={Math.min(1000, c.coverImg.width)} />
+              : <span class="nocover"></span>}
+            <span class="pov">
+              <span class="pname">{lines(c).map((l) => <span>{l}</span>)}</span>
+              <span class="pcount">{c.count} {c.count === 1 ? 'photo' : 'photos'}</span>
             </span>
           </span>
-          <span class="pname">{c.label}</span>
-          <span class="pcount">{c.count} {c.count === 1 ? 'photo' : 'photos'}</span>
         </a>
       </li>
     ))}
