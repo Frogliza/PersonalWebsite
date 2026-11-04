@@ -11,9 +11,8 @@ const { category } = Astro.params;
 const label = categories.find((c) => c.key === category)?.label;
 const list = collectionList.filter((c) => c.category === category);
 
-/* Collections whose name is shown on three lines, split at the "&" (Reptiles / & / Amphibians). */
-const threeLines = ['reptiles-and-amphibians'];
-const lines = (c) => (threeLines.includes(c.key) ? c.label.split(/ (&) /) : [c.label]);
+/* Any collection name with an "&" is shown on three lines, split at the "&" (Reptiles / & / Amphibians). */
+const lines = (c) => c.label.split(/ (&) /);
 ---
 <Base section="gallery" title={`${label} – Marcus Rust`}>
   <CatNav active={category} />
