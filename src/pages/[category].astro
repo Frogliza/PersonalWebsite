@@ -16,6 +16,7 @@ const lines = (c) => c.label.split(/ (&) /);
 ---
 <Base section="gallery" title={`${label} – Marcus Rust`}>
   <CatNav active={category} />
+  <div class="pilewrap">
   <ul class="piles">
     {list.map((c) => (
       <li>
@@ -33,4 +34,5 @@ const lines = (c) => c.label.split(/ (&) /);
       </li>
     ))}
   </ul>
+  </div>
 </Base>
